@@ -13,7 +13,7 @@ var caravan = {
 function Character(name) {
   this.name = name;
   this.health = 100;
-  this.diseased = false;
+  this.diseases = 0;
 }
 
 Character.prototype.healthGain = function() {
@@ -22,13 +22,11 @@ Character.prototype.healthGain = function() {
 
 Character.prototype.healthLoss = function() { //daily health loss
   var starvingModifier = 1;
-  var diseasedModifier = 0;
+  var diseasedModifier = this.diseases * 2;
   if (caravan.food <= 0) {
     starvingModifier = 2;
   }
-  if (this.diseased){
-    diseasedModifier = 2;
-  }
+
   this.health -= (1 + diseasedModifier) * starvingModifier;
 }
 
@@ -70,13 +68,17 @@ var fortPrompt = function(inputNumber) {
 
 function fates(roll) {
   var charIndex = rollNumber(0,5);
+  var more = "";
   if(roll<=7) {
-    console.log(caravan.party[charIndex].name+" has been diseased!");
-    caravan.party[charIndex].diseased=true;
+    if(caravan.party[charIndex].diseases > 0){/////////////
+      more = "nother";
+    }
+    console.log(caravan.party[charIndex].name+" got a" + more + " disease!");
+    caravan.party[charIndex].diseases += 1;
   }else if(roll<=14){
     console.log(caravan.party[charIndex].name+" has broken their foot!");
     caravan.party[charIndex].health-=50;
-  }else if(roll<=21){
+  }else if(roll<=21 && caravan.food > 0){
     console.log(caravan.party[charIndex].name+" has dropped a lot of food!")
     caravan.food-=50;
   }
