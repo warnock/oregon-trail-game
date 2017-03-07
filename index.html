@@ -5,11 +5,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="css/styles.css" type="text/css" rel="stylesheet">
     <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="js/input-script.js" type="text/javascript"></script>
     <script src="js/script.js" type="text/javascript"></script>
+
   </head>
   <body>
     <div class="container">
       <div class="imgHeader">
+      </div>
+      <div class="randomEvent">
+        <h3>Here's a random event</h3>
       </div>
       <div class="row">
         <div class="col-md-4">
@@ -56,8 +61,37 @@
             <span id="continueOnTrail" class="btn btn-default">Continue on Trail</span>
             <span id="rest" class="btn btn-default">Rest</span>
             <span id="hunt" class="btn btn-default">Hunt</span>
+            <div class="trailOutcome">
+              <h3>On the trail today:</h3>
+              <p>You lost food</p>
+              <p>Your health decreased</p>
+              <p>You made progress toward next checkpoint</p>
+            </div>
+            <div class="restOutcome">
+              <h3>You've decided to rest today, this will:</h3>
+              <p>Increase your food</p>
+              <p>Increase your health</p>
+            </div>
+            <div class="huntOutcome">
+              <h3>You enjoyed the thrill of the hunt:</h3>
+              <p>Gain <span id="huntReward"></span> food</p>
+              <p>Decrease your health</p>
+            </div>
           </div>
-
+        </div>
+        <div class="col-md-8" id="fortScreen">
+          <div class="fortMessage">
+            <h3>Welcome to <span class="checkpointLocation"></span></h3>
+          </div>
+          <div class="fortOptions">
+            <span id="continueOnTrail" class="btn btn-default">Continue on Trail</span>
+            <span id="rest" class="btn btn-default">Rest</span>
+            <div class="restOutcome">
+              <h3>You've decided to rest today, this will:</h3>
+              <p>Increase your food</p>
+              <p>Increase your health</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
