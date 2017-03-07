@@ -27,12 +27,13 @@ Character.prototype.healthLoss = function() { //daily health loss
     starvingModifier = 2;
   }
 
-  this.health -= (1 + diseasedModifier) * starvingModifier;
+  this.health -= (5 + diseasedModifier) * starvingModifier;
 }
 
 Character.prototype.deathCheck = function(i) {
   if(this.health<=0) {
     caravan.party.splice(i, 1);
+    console.log(this.name+" has died. Sorry about it.");
   }
 }
 
@@ -54,6 +55,9 @@ var trailPrompt = function(inputNumber) {
       break;
     case 3:
       hunt();
+      break;
+    case 4:
+      medicine();
       break;
   }
 }
@@ -107,6 +111,22 @@ function rollNumber(min, max) {
   max = Math.floor(max); //exclusive
   return Math.floor(Math.random() * (max - min)) + min;
 }
+function medicine() {
+  if (caravan.medicine <= 0){
+    console.log("You have 0 medicines.")
+  } else {
+    patientIndex = parseInt(prompt("Who to heal? 1-5?")) - 1;
+    if (caravan.party[patientIndex].diseases < 1) {
+      console.log(caravan.party[patientIndex].name + " is not sick! Psh.")
+    } else {
+      caravan.medicine -= 1;
+      caravan.party[patientIndex].diseases -= 1;
+      console.log("You have successfully removed a disease from " + caravan.party[patientIndex].name + "'s body.")
+    }
+  }
+  var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
+  trailPrompt(prom);
+}
 
 function rest() {
   foodLoss();
@@ -115,7 +135,7 @@ function rest() {
     element.healthGain();
   });
   game.totalDays++;
-  var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+  var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
   trailPrompt(prom);
 }
 
@@ -128,7 +148,7 @@ function hunt() {
     element.healthLoss();
   });
   game.totalDays++;
-  var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+  var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
   trailPrompt(prom);
 }
 
@@ -150,7 +170,7 @@ function travel() {
     var prom = parseInt(prompt("1 2 or 3"));
     fortPrompt(prom);
   } else {
-    var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+    var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
     trailPrompt(prom);
   }
 }
@@ -164,5 +184,5 @@ var char4 = new Character("Gloria");
 var char5 = new Character("Megan");
 caravan.party.push(char1, char2, char3, char4, char5);
 
-var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
 trailPrompt(prom);
