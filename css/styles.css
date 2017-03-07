@@ -1,12 +1,19 @@
 html, body {
   width: 100%;
   height: auto;
+  margin: 0;
+  padding: 0;
 }
 .boxOne {
   background-image: url("../img/headerHome.jpg");
   background-attachment: fixed;
-  background-size: contain;;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 .statsBox {
-  
+  background-color: #eee;
 }
