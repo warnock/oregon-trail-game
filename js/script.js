@@ -21,13 +21,24 @@ Character.prototype.healthGain = function() {
 }
 
 Character.prototype.healthLoss = function() { //daily health loss
-  if(this.diseased===true){
-    this.health -= 3;
+  var starvingModifier = 1;
+  var diseasedModifier = 0;
+  if (caravan.food <= 0) {
+    starvingModifier = 2;
   }
-  else this.health -= 1;
+  if (this.diseased){
+    diseasedModifier = 2;
+  }
+  this.health -= (1 + diseasedModifier) * starvingModifier;
 }
 
-
+function foodLoss() {
+  caravan.food -= 2 * caravan.party.length;
+  if (caravan.food <= 0) {
+    caravan.food = 0;
+    console.log("Out of food!");
+  }
+}
 
 var trailPrompt = function(inputNumber) {
   switch (inputNumber) {
@@ -79,31 +90,34 @@ function rollNumber(min, max) {
 }
 
 function rest() {
-  caravan.food -= 2 * caravan.party.length;
-  if (caravan.food <= 0) {
-    caravan.food = 0;
-    console.log("Out of food!");
-  }
+  foodLoss();
 
   caravan.party.forEach(function (element) {
     element.healthGain();
   });
   game.totalDays++;
+  var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+  trailPrompt(prom);
 }
 
 function hunt() {
-  caravan.food -= 2 * caravan.party.length;
-  meatGained = rollNumber(1, 10);
+  var meatGained = rollNumber(1, 10);
   console.log(meatGained);
   caravan.food += meatGained * caravan.party.length;
+  foodLoss();
+  caravan.party.forEach(function (element) {
+    element.healthLoss();
+  });
   game.totalDays++;
+  var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+  trailPrompt(prom);
 }
 
 function travel() {
   var roll = rollNumber(1,101);
   console.log(roll);
   fates(roll);
-  caravan.food -= 2 * caravan.party.length;
+  foodLoss();
   caravan.party.forEach(function (element) {
     element.healthLoss();
   });
@@ -111,6 +125,7 @@ function travel() {
   game.daysLeft--;
   console.log(char1, char2, char3, char4, char5, caravan);
   if (game.daysLeft === 0) {
+    game.daysLeft === 10;
     var prom = parseInt(prompt("1 2 or 3"));
     fortPrompt(prom);
   } else {
