@@ -17,22 +17,22 @@ $(document).ready(function() {
     console.log(member4);
   });
 
-  // Trail Screen Inputs
-  $("#continueOnTrail").click(function() {
+  // Trail Screen and For Screen Inputs
+  $(".continueOnTrail").click(function() {
     console.log("Continue on Trail click");
 
     var option = 1;
     console.log(option);
   });
 
-  $("#rest").click(function() {
+  $(".rest").click(function() {
     console.log("Rest click");
 
     var option = 2;
     console.log(option);
   });
 
-  $("#hunt").click(function() {
+  $(".hunt").click(function() {
     console.log("Hunt click");
 
     var option = 3;
