@@ -1,6 +1,6 @@
 var game = {
   totalDays: 0,
-  daysLeft: 10
+  daysLeft: 50
 };
 
 var caravan = {
@@ -165,10 +165,15 @@ function travel() {
   game.daysLeft--;
   console.log(char1, char2, char3, char4, char5, caravan);
   console.log(game.daysLeft);
-  if (game.daysLeft === 0) {
-    game.daysLeft = 10;
+  if (game.daysLeft === 0) {  //GAME OVER WIN
+    var left = 5 - caravan.party.length;
+    console.log("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
+  } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort?
     var prom = parseInt(prompt("1 2 or 3"));
     fortPrompt(prom);
+  } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river?
+    var prom = parseInt(prompt("1 2 or 3"));
+    fortPrompt(prom);//TURN INTO RIVER PROMPT!!!!!
   } else {
     var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
     trailPrompt(prom);
