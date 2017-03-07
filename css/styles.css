@@ -14,9 +14,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.col-md-4{
-  background-color: #eee;
-}
-.col-md-8 {
-  background: lightgray;
+
+#homeScreen {
+  display: none;
 }

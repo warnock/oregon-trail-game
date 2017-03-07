@@ -111,13 +111,13 @@ function rollNumber(min, max) {
 function rest() {
   foodLoss();
 
-  caravan.party.forEach(function (element) {
-    element.healthGain();
-  });
-  game.totalDays++;
-  var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
-  trailPrompt(prom);
-}
+//   caravan.party.forEach(function (element) {
+//     element.healthGain();
+//   });
+//   game.totalDays++;
+//   var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+//   trailPrompt(prom);
+// }
 
 function hunt() {
   var meatGained = rollNumber(1, 10);
