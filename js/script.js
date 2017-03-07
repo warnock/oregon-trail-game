@@ -64,7 +64,9 @@ var rest = function() {
 
 var hunt = function() {
   caravan.food -= 2 * caravan.party.length;
-  caravan.food += 4 * caravan.party.length;
+  meatGained = rollNumber(1, 10);
+  console.log(meatGained);
+  caravan.food += meatGained * caravan.party.length;
   game.totalDays++;
 }
 
