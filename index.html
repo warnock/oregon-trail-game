@@ -13,10 +13,10 @@
     <div class="container">
       <div class="imgHeader">
       </div>
+      <div class="randomEvent">
+        <h3>Here's a random event</h3>
+      </div>
       <div class="row">
-        <div class="randomEvent">
-          <h3>Here's a random event</h3>
-        </div>
         <div class="col-md-4">
           <div class="statsBox">
             <h1>Day: <span class="totalDays"></span></h1>
@@ -76,6 +76,20 @@
               <h3>You enjoyed the thrill of the hunt:</h3>
               <p>Gain <span id="huntReward"></span> food</p>
               <p>Decrease your health</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8" id="fortScreen">
+          <div class="fortMessage">
+            <h3>Welcome to <span class="checkpointLocation"></span></h3>
+          </div>
+          <div class="fortOptions">
+            <span id="continueOnTrail" class="btn btn-default">Continue on Trail</span>
+            <span id="rest" class="btn btn-default">Rest</span>
+            <div class="restOutcome">
+              <h3>You've decided to rest today, this will:</h3>
+              <p>Increase your food</p>
+              <p>Increase your health</p>
             </div>
           </div>
         </div>
