@@ -20,11 +20,16 @@ Character.prototype.healthGain = function() {
   this.health += 20;
 }
 
-Character.prototype.healthLoss = function() {
-  this.health -= 1;
+Character.prototype.healthLoss = function() { //daily health loss
+  if(this.diseased===true){
+    this.health -= 3;
+  }
+  else this.health -= 1;
 }
 
-var prompt = function(inputNumber) {
+
+
+var trailPrompt = function(inputNumber) {
   switch (inputNumber) {
     case 1:
       travel();
@@ -37,13 +42,32 @@ var prompt = function(inputNumber) {
       break;
   }
 }
+
+var fortPrompt = function(inputNumber) {
+  switch (inputNumber) {
+    case 1:
+      travel();
+      break;
+    case 2:
+      rest();
+      break;
+    case 3:
+      hunt();//replace with trade?
+      break;
+  }
+}
+
 function fates(roll) {
   var charIndex = rollNumber(0,5);
   if(roll<=7) {
-
+    console.log(caravan.party[charIndex].name+" has been diseased!");
     caravan.party[charIndex].diseased=true;
-  }else if(roll<=15){
-    caravan.party[charIndex].health=0;
+  }else if(roll<=14){
+    console.log(caravan.party[charIndex].name+" has broken their foot!");
+    caravan.party[charIndex].health-=50;
+  }else if(roll<=21){
+    console.log(caravan.party[charIndex].name+" has dropped a lot of food!")
+    caravan.food-=50;
   }
 
 }
@@ -54,15 +78,20 @@ function rollNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var rest = function() {
+function rest() {
   caravan.food -= 2 * caravan.party.length;
+  if (caravan.food <= 0) {
+    caravan.food = 0;
+    console.log("Out of food!");
+  }
+
   caravan.party.forEach(function (element) {
     element.healthGain();
   });
   game.totalDays++;
 }
 
-var hunt = function() {
+function hunt() {
   caravan.food -= 2 * caravan.party.length;
   meatGained = rollNumber(1, 10);
   console.log(meatGained);
@@ -70,7 +99,7 @@ var hunt = function() {
   game.totalDays++;
 }
 
-var travel = function() {
+function travel() {
   var roll = rollNumber(1,101);
   console.log(roll);
   fates(roll);
@@ -80,7 +109,17 @@ var travel = function() {
   });
   game.totalDays++;
   game.daysLeft--;
+  console.log(char1, char2, char3, char4, char5, caravan);
+  if (game.daysLeft === 0) {
+    var prom = parseInt(prompt("1 2 or 3"));
+    fortPrompt(prom);
+  } else {
+    var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+    trailPrompt(prom);
+  }
 }
+
+
 
 var char1 = new Character("Ryan");
 var char2 = new Character("Riley");
@@ -88,3 +127,6 @@ var char3 = new Character("Chris");
 var char4 = new Character("Gloria");
 var char5 = new Character("Megan");
 caravan.party.push(char1, char2, char3, char4, char5);
+
+var prom = parseInt(prompt("1) Travel, 2) Rest or 3) Hunt"));
+trailPrompt(prom);
