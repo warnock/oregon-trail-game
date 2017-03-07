@@ -4,7 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.boxOne {
+.imgHeader {
   background-image: url("../img/headerHome.jpg");
   background-attachment: fixed;
   background-size: contain;
@@ -14,6 +14,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.statsBox {
-  background-color: #eee;
+
+#homeScreen {
+  display: none;
 }
