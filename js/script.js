@@ -30,6 +30,12 @@ Character.prototype.healthLoss = function() { //daily health loss
   this.health -= (1 + diseasedModifier) * starvingModifier;
 }
 
+Character.prototype.deathCheck = function(i) {
+  if(this.health<=0) {
+    caravan.party.splice(i, 1);
+  }
+}
+
 function foodLoss() {
   caravan.food -= 2 * caravan.party.length;
   if (caravan.food <= 0) {
@@ -81,6 +87,17 @@ function fates(roll) {
   }else if(roll<=21 && caravan.food > 0){
     console.log(caravan.party[charIndex].name+" has dropped a lot of food!")
     caravan.food-=50;
+  }else if(roll>=98) {
+    caravan.food+=50;
+    console.log("Your caravan comes across a field of ripe berries")
+  }else if(roll>=95) {
+    caravan.medicine+=2;
+    console.log("A traveling apothecary has gifted you 2 medicines")
+  }else if(roll>=90) {
+    caravan.party.forEach(function (element) {
+      element.healthGain();
+    });
+    console.log("You find a hot spring! Your party feels more rested")
   }
 
 }
@@ -120,14 +137,16 @@ function travel() {
   console.log(roll);
   fates(roll);
   foodLoss();
-  caravan.party.forEach(function (element) {
+  caravan.party.forEach(function (element, i) {
     element.healthLoss();
+    element.deathCheck(i);
   });
   game.totalDays++;
   game.daysLeft--;
   console.log(char1, char2, char3, char4, char5, caravan);
+  console.log(game.daysLeft);
   if (game.daysLeft === 0) {
-    game.daysLeft === 10;
+    game.daysLeft = 10;
     var prom = parseInt(prompt("1 2 or 3"));
     fortPrompt(prom);
   } else {
