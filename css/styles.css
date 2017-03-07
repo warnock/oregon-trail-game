@@ -1,0 +1,12 @@
+html, body {
+  width: 100%;
+  height: auto;
+}
+.boxOne {
+  background-image: url("../img/headerHome.jpg");
+  background-attachment: fixed;
+  background-size: contain;;
+}
+.statsBox {
+  
+}
