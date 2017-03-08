@@ -54,4 +54,11 @@ $(document).ready(function() {
     console.log(option);
   });
 
+  $(".restartGame").click(function() {
+    console.log("Restart click");
+
+    var option = 6;
+    console.log(option);
+  });
+
 });
