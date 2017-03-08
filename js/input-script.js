@@ -21,12 +21,16 @@ $(document).ready(function() {
   $(".continueOnTrail").click(function() {
     console.log("Continue on Trail click");
 
+    $(".imgHeader").css("background-image", "url(img/trail.jpg)");
+
     var option = 1;
     console.log(option);
   });
 
   $(".rest").click(function() {
     console.log("Rest click");
+
+    $(".imgHeader").css("background-image", "url(img/rest.png)");
 
     var option = 2;
     console.log(option);
@@ -35,12 +39,16 @@ $(document).ready(function() {
   $(".hunt").click(function() {
     console.log("Hunt click");
 
+    $(".imgHeader").css("background-image", "url(img/hunt.png)");
+
     var option = 3;
     console.log(option);
   });
 
   $(".heal").click(function() {
     console.log("Heal click");
+
+    $(".imgHeader").css("background-image", "url(img/dinosaurtrail.jpg)");
 
     var option = 4;
     console.log(option);
@@ -49,6 +57,8 @@ $(document).ready(function() {
   // This functions exactly like rest.click
   $(".mourn").click(function() {
     console.log("Mourn click");
+
+    $(".imgHeader").css("background-image", "url(img/mourn.jpg)");
 
     var option = 5;
     console.log(option);
