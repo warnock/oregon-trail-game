@@ -80,7 +80,7 @@ function fates(roll) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
   if(roll<=7) {
-    if(caravan.party[charIndex].diseases > 0){/////////////
+    if(caravan.party[charIndex].diseases > 0){
       more = "nother";
     }
     console.log(caravan.party[charIndex].name+" got a" + more + " disease!");
@@ -127,21 +127,50 @@ function talk() {
   }
 }
 
+// function medicine() {
+//   if (caravan.medicine <= 0){
+//     console.log("You have 0 medicines.")
+//   } else {
+//     patientIndex = parseInt(prompt("Who to heal? 1-5?")) - 1;
+//     if (caravan.party[patientIndex].diseases < 1) {
+//       console.log(caravan.party[patientIndex].name + " is not sick! Psh.")
+//     } else {
+//       caravan.medicine -= 1;
+//       caravan.party[patientIndex].diseases -= 1;
+//       console.log("You have successfully removed a disease from " + caravan.party[patientIndex].name + "'s body.")
+//     }
+//   }
+//   var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
+//   trailPrompt(prom);
+// }
+
 function medicine() {
-  if (caravan.medicine <= 0){
+  if (caravan.medicine <= 0) {
     console.log("You have 0 medicines.")
   } else {
-    patientIndex = parseInt(prompt("Who to heal? 1-5?")) - 1;
-    if (caravan.party[patientIndex].diseases < 1) {
-      console.log(caravan.party[patientIndex].name + " is not sick! Psh.")
+    var index;
+    var lowestHealth = 1000;
+    caravan.party.forEach(function(element, i) {
+      if (element.diseases > 0) {
+        if (element.health < lowestHealth) {
+          lowestHealth = element.health;
+          index = i;
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+    });
+    if (lowestHealth === 200) {
+      console.log("No one is siiiick.")
     } else {
+      caravan.party[index].diseases -= 1;
       caravan.medicine -= 1;
-      caravan.party[patientIndex].diseases -= 1;
-      console.log("You have successfully removed a disease from " + caravan.party[patientIndex].name + "'s body.")
+      console.log(caravan.party[index].name + " has been healed 1 disease.")
     }
   }
-  var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
-  trailPrompt(prom);
+  return;
 }
 
 function rest() {
