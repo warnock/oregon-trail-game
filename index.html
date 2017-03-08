@@ -83,16 +83,34 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8" id="fortScreen">
-          <div class="fortMessage">
+        <div class="col-md-8" id="checkpointScreen">
+          <div class="checkpointMessage">
             <h3>Welcome to <span class="checkpointLocation"></span></h3>
           </div>
-          <div class="fortOptions">
+          <div class="checkpointOptions">
             <span class="btn btn-default continueOnTrail">Continue on Trail</span>
             <span class="btn btn-default rest">Rest</span>
-            <span class="btn btn-default hunt">Heal</span>
+            <span class="btn btn-default heal">Heal</span>
             <div class="restOutcome">
               <h3>You've decided to rest today, this will:</h3>
+              <p>Increase your food</p>
+              <p>Increase your health</p>
+            </div>
+            <div class="healOutcome">
+              <h3>You have healed one sick wagon member</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8" id="deathScreen">
+          <div class="deathMessage">
+            <h3><span class="partyMemberDeath"></span> has died. Bummer.</h3>
+          </div>
+          <div class="deathOptions">
+            <span class="btn btn-default continueOnTrail">Continue on Trail</span>
+            <span class="btn btn-default mourn">Mourn</span>
+            <span class="btn btn-default heal">Heal</span>
+            <div class="mournOutcome">
+              <h3>You are too grief stricken to keep going on the trail and need to rest, this will:</h3>
               <p>Increase your food</p>
               <p>Increase your health</p>
             </div>
