@@ -1,6 +1,6 @@
 var game = {
   totalDays: 0,
-  daysLeft: 5
+  daysLeft: 15
 };
 
 var caravan = {
@@ -27,7 +27,7 @@ Character.prototype.healthLoss = function() { //daily health loss
     starvingModifier = 2;
   }
 
-  this.health -= (40 + diseasedModifier) * starvingModifier;
+  this.health -= (5 + diseasedModifier) * starvingModifier;
 }
 
 Character.prototype.deathCheck = function(i) {
@@ -71,7 +71,7 @@ var fortPrompt = function(inputNumber) {
       rest();
       break;
     case 3:
-      hunt();//replace with trade?
+      talk();//replace with trade?
       break;
   }
 }
@@ -95,7 +95,7 @@ function fates(roll) {
     caravan.food+=50;
     console.log("Your caravan comes across a field of ripe berries")
   }else if(roll>=95) {
-    caravan.medicine+=2;
+    caravan.medicine+=1;
     console.log("A traveling apothecary has gifted you 2 medicines")
   }else if(roll>=90) {
     caravan.party.forEach(function (element) {
@@ -111,6 +111,22 @@ function rollNumber(min, max) {
   max = Math.floor(max); //exclusive
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+function talk() {
+  var talkRoll = rollNumber(0,4);
+  if(talkRoll===0) {
+    console.log("Howdy Yall! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance");
+  }else if(talkRoll===1) {
+    console.log("Why Hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance");
+  }else if(talkRoll===2) {
+    console.log("GIMME YA LOOTS YA DARN YANKIES");
+  }else if(talkRoll===3) {
+    console.log("Pardon me, do yall have any spare change?")
+  }else {
+    console.log("talk function error")
+  }
+}
+
 function medicine() {
   if (caravan.medicine <= 0){
     console.log("You have 0 medicines.")
@@ -191,8 +207,6 @@ function travel() {
     trailPrompt(prom);
   }
 }
-
-
 
 var char1 = new Character("Ryan");
 var char2 = new Character("Riley");
