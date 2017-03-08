@@ -61,7 +61,7 @@
             <span class="btn btn-default continueOnTrail">Continue on Trail</span>
             <span class="btn btn-default rest">Rest</span>
             <span class="btn btn-default hunt">Hunt</span>
-            <span class="btn btn-default hunt">Heal</span>
+            <span class="btn btn-default heal">Heal</span>
             <div class="trailOutcome">
               <h3>On the trail today:</h3>
               <p>You lost food</p>
@@ -117,6 +117,23 @@
             <div class="healOutcome">
               <h3>You have healed one sick wagon member</h3>
             </div>
+          </div>
+        </div>
+        <div class="col-md-8" id="gameOverLoseScreen">
+          <div class="gameOverLoseMessage">
+            <h3>Everyone in your party has died. Unfortunately, this means you lost the game. Better luck next time.</h3>
+          </div>
+          <div class="gameOverLoseOptions">
+            <span class="btn btn-default restartGame">Try Again.</span>
+          </div>
+        </div>
+        <div class="col-md-8" id="gameOverWinScreen">
+          <div class="gameOverWinMessage">
+            <h3>You've made it to Oregon. Congratulations.</h3>
+            <h3>Surviving Members: <span class="survivingMembers"></h3>
+          </div>
+          <div class="gameOverWinOptions">
+            <span class="btn btn-default restartGame">That was fun, let's play again.</span>
           </div>
         </div>
       </div>
