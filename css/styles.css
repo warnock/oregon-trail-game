@@ -9,15 +9,20 @@ html, body {
 }
 .imgHeader {
   /*background-image: url("../img/headerHome.jpg");*/
-  background-image: url("../img/fortlaramie.png");
+  background-image: url("../img/rest.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   height: 350px;
   width: 100%;
 }
-#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
-  /*display: none;*/
+
+ul {
+  font-size: 25px;
+}
+
+#trailScreen, #deathScreen, #checkpointScreen, #gameOverLoseScreen, #gameOverWinScreen {
+  display: none;
 }
 
 #homeScreen {
@@ -70,4 +75,24 @@ button, span.continueOnTrail, .hunt, .rest, .heal, .mourn, .restartGame {
 #trailScreen {
   padding-top: 35px;
   padding-left: 35px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.restOutcome, .trailOutcome, .healOutcome, .mournOutcome, .huntOutcome, .gameOverLoseMessage, .gameOverWinScreen {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: solid 3px blue;
+  border-radius: 5px;
+  padding-left: 20px;
 }
