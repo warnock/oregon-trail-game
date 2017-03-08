@@ -8,23 +8,26 @@ html, body {
   color: white;
 }
 .imgHeader {
-  background-image: url("../img/headerHome.jpg");
-  background-attachment: fixed;
+  /*background-image: url("../img/headerHome.jpg");*/
+  background-image: url("../img/fortlaramie.png");
+  background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   height: 350px;
   width: 100%;
-  margin: 0;
-  padding: 0;
+}
+#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
+  /*display: none;*/
 }
 
-#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
+#homeScreen {
   display: none;
 }
 
 .randomEvent {
   text-align: center;
   border: dotted 2px #00C100;
+  height: 60px;
 }
 
 .statsBox {
@@ -48,11 +51,23 @@ label {
   font-size: 20px;
 }
 
-button {
+button:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+button, span.continueOnTrail, .hunt, .rest, .heal, .mourn, .restartGame {
+  color: black;
   background-color: #00C100;
-  padding: 5px;
+  padding: 10px;
   margin-top: 10px;
   font-size: 25px;
   border-radius: 5px;
   border: solid 5px white;
+}
+
+#trailScreen {
+  padding-top: 35px;
+  padding-left: 35px;
 }
