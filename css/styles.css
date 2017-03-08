@@ -8,8 +8,7 @@ html, body {
   color: white;
 }
 .imgHeader {
-  /*background-image: url("../img/headerHome.jpg");*/
-  background-image: url("../img/rest.png");
+  background-image: url("../img/headerHome.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -21,7 +20,7 @@ ul {
   font-size: 25px;
 }
 
-#trailScreen, #deathScreen, #checkpointScreen, #gameOverLoseScreen, #gameOverWinScreen {
+#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
   display: none;
 }
 
