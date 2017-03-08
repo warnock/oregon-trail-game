@@ -20,11 +20,11 @@
       <div class="row">
         <div class="col-md-4">
           <div class="statsBox">
-            <h2>Day: <span class="totalDays"></span></h2>
-            <h3>Wagon Party:</h3>
+            <h1>Day: <span class="totalDays"></span></h1>
+            <h2>Wagon Party:</h2>
             <ul class="wagonMembers">
             </ul>
-            <h3>Supplies: </h3>
+            <h2>Supplies: </h2>
             <ul>
               <li>Food: <span class="food"></span></li>
               <li>Medicine: <span class="medicine"></span></li>
@@ -57,82 +57,16 @@
             <button type="submit">Start Game</button>
           </form>
         </div>
-        <div class="col-md-8" id="trailScreen">
-          <div class="trailOptions">
+        <div class="col-md-8" id="GameScreen">
+          <div class="options">
             <span class="btn btn-default continueOnTrail">Continue on Trail</span>
             <span class="btn btn-default rest">Rest</span>
+            <span class="btn btn-default mourn">Mourn</span>
             <span class="btn btn-default hunt">Hunt</span>
             <span class="btn btn-default heal">Heal</span>
-            <div class="trailOutcome">
-              <h3>On the trail today:</h3>
-              <p id="trailHappen"></p>
-            </div>
-            <div class="restOutcome">
-              <h3>You've decided to rest today, this will:</h3>
-              <p>Decrease your food</p>
-              <p>Increase your health</p>
-            </div>
-            <div class="huntOutcome">
-              <h3>You enjoyed the thrill of the hunt:</h3>
-              <p>Gain <span id="huntReward"></span> food</p>
-              <p>Decrease your health</p>
-            </div>
-            <div class="healOutcome">
-              <h3>You have healed one sick wagon member</h3>
-            </div>
+            <span class="btn btn-default restartGame">Play Again.</span>
           </div>
-        </div>
-        <div class="col-md-8" id="checkpointScreen">
-          <div class="checkpointMessage">
-            <h2>Welcome to <span class="checkpointLocation"></span></h2>
-          </div>
-          <div class="checkpointOptions">
-            <span class="btn btn-default continueOnTrail">Continue on Trail</span>
-            <span class="btn btn-default rest">Rest</span>
-            <span class="btn btn-default heal">Heal</span>
-            <div class="restOutcome">
-              <h3>You've decided to rest today, this will:</h3>
-              <p>Decrease your food</p>
-              <p>Increase your health</p>
-            </div>
-            <div class="healOutcome">
-              <h3>You have healed one sick wagon member</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" id="deathScreen">
-          <div class="deathMessage">
-            <h3><span class="partyMemberDeath"></span> has died. Bummer.</h3>
-          </div>
-          <div class="deathOptions">
-            <span class="btn btn-default continueOnTrail">Continue on Trail</span>
-            <span class="btn btn-default mourn">Mourn</span>
-            <span class="btn btn-default heal">Heal</span>
-            <div class="mournOutcome">
-              <h3>You are too grief stricken to keep going on the trail and need to rest, this will:</h3>
-              <p>Decrease your food</p>
-              <p>Increase your health</p>
-            </div>
-            <div class="healOutcome">
-              <h3>You have healed one sick wagon member</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" id="gameOverLoseScreen">
-          <div class="gameOverLoseMessage">
-            <h3>Everyone in your party has died. Unfortunately, this means you lost the game. Better luck next time.</h3>
-          </div>
-          <div class="gameOverLoseOptions">
-            <span class="btn btn-default restartGame">Try Again.</span>
-          </div>
-        </div>
-        <div class="col-md-8" id="gameOverWinScreen">
-          <div class="gameOverWinMessage">
-            <h3>You've made it to Oregon. Congratulations.</h3>
-            <h3>Surviving Members: <span class="survivingMembers"></h3>
-          </div>
-          <div class="gameOverWinOptions">
-            <span class="btn btn-default restartGame">That was fun, let's play again.</span>
+          <div class="events">
           </div>
         </div>
       </div>
