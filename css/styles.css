@@ -3,6 +3,7 @@ html, body {
   height: auto;
   margin: 0;
   padding: 0;
+  font-family: 'VT323', monospace;
 }
 .imgHeader {
   background-image: url("../img/headerHome.jpg");
@@ -15,6 +16,20 @@ html, body {
   padding: 0;
 }
 
-#homeScreen {
+#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
   display: none;
+}
+
+.randomEvent {
+  text-align: center;
+  border: dotted 2px black;
+}
+
+.statsBox {
+  margin-top: 30px;
+  border-top-style: dashed;
+  border-right-style: dotted;
+  border-bottom-style: dashed;
+  border-color: black;
+  border-size: 3px;
 }
