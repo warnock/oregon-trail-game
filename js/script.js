@@ -1,6 +1,6 @@
 var game = {
   totalDays: 0,
-  daysLeft: 50
+  daysLeft: 5
 };
 
 var caravan = {
@@ -27,13 +27,13 @@ Character.prototype.healthLoss = function() { //daily health loss
     starvingModifier = 2;
   }
 
-  this.health -= (5 + diseasedModifier) * starvingModifier;
+  this.health -= (40 + diseasedModifier) * starvingModifier;
 }
 
 Character.prototype.deathCheck = function(i) {
+  // debugger;
   if(this.health<=0) {
-    caravan.party.splice(i, 1);
-    console.log(this.name+" has died. Sorry about it.");
+    return true;
   }
 }
 
@@ -77,7 +77,7 @@ var fortPrompt = function(inputNumber) {
 }
 
 function fates(roll) {
-  var charIndex = rollNumber(0,5);
+  var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
   if(roll<=7) {
     if(caravan.party[charIndex].diseases > 0){/////////////
@@ -157,16 +157,28 @@ function travel() {
   console.log(roll);
   fates(roll);
   foodLoss();
-  caravan.party.forEach(function (element, i) {
+  caravan.party.forEach(function (element) {
     element.healthLoss();
-    element.deathCheck(i);
   });
+
+
+  for(var i = 0; i < caravan.party.length; i++) {
+    if(caravan.party[i].deathCheck(i)) {
+      console.log(caravan.party[i].name + " has died. Sorry about it.");
+      caravan.party.splice(i, 1);
+      if (caravan.party.length <= 0) {
+        console.log("Everyone in your party has died. The party is over.");
+      }
+      i--;
+    }
+  }
+
   game.totalDays++;
   game.daysLeft--;
   console.log(char1, char2, char3, char4, char5, caravan);
   console.log(game.daysLeft);
   if (game.daysLeft === 0) {  //GAME OVER WIN
-    var left = 5 - caravan.party.length;
+    var left = caravan.party.length;
     console.log("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
   } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort?
     var prom = parseInt(prompt("1 2 or 3"));
