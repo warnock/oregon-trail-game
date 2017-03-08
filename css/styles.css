@@ -4,6 +4,8 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'VT323', monospace;
+  background-color: black;
+  color: white;
 }
 .imgHeader {
   background-image: url("../img/headerHome.jpg");
@@ -22,7 +24,7 @@ html, body {
 
 .randomEvent {
   text-align: center;
-  border: dotted 2px black;
+  border: dotted 2px #00C100;
 }
 
 .statsBox {
@@ -30,6 +32,27 @@ html, body {
   border-top-style: dashed;
   border-right-style: dotted;
   border-bottom-style: dashed;
-  border-color: black;
+  border-color: #00C100;
   border-size: 3px;
+  height: 500px;
+}
+
+input[type = "text"] {
+  background-color: blue;
+  border: dashed 1px;
+  color: white;
+  width: 300px;
+}
+
+label {
+  font-size: 20px;
+}
+
+button {
+  background-color: #00C100;
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 25px;
+  border-radius: 5px;
+  border: solid 5px white;
 }
