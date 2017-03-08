@@ -60,54 +60,6 @@ function checkDeath() {
   }
 }
 
-var trailPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("trail");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      hunt();
-      break;
-    case 4:
-      medicine();
-      break;
-  }
-}
-
-var fortPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("trail");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      talk();
-      break;
-    case 4:
-      medicine();
-      break;
-  }
-}
-
-var riverPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("river");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      medicine();
-      break;
-  }
-}
-
 function fates(roll, rivOrTrail) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
@@ -271,12 +223,7 @@ function travel(rivOrTrail) {
 
 }
 
-var char1 = new Character("Ryan");
-var char2 = new Character("Riley");
-var char3 = new Character("Chris");
-var char4 = new Character("Gloria");
-var char5 = new Character("Megan");
-caravan.party.push(char1, char2, char3, char4, char5);
+
 
 //where things go to die
 // function medicine() {
@@ -319,11 +266,17 @@ $(function() {
     var member3 = $("#addMember3").val();
     var member4 = $("#addMember4").val();
 
-    console.log(wagonLeader);
-    console.log(member1);
-    console.log(member2);
-    console.log(member3);
-    console.log(member4);
+    var char1 = new Character(wagonLeader);
+    var char2 = new Character(member1);
+    var char3 = new Character(member2);
+    var char4 = new Character(member3);
+    var char5 = new Character(member4);
+    caravan.party.push(char1, char2, char3, char4, char5);
+
+    updateStats();
+    $("#homeScreen").hide();
+    $("#trailScreen").show();
+
   });
 
   $(".continueOnTrail").click(function() {
