@@ -1,6 +1,6 @@
 var game = {
   totalDays: 0,
-  daysLeft: 15
+  daysLeft: 25
 };
 
 var caravan = {
@@ -10,8 +10,7 @@ var caravan = {
   // this.wagonParts = 5;
 }
 
-var forts = ["Fort Laramie", "Fort Bridger"];
-var rivers = ["Big Blue River", "Snake River"];
+var checkpoints = ["Fort Laramie", "the Big Blue River", "Fort Bridger", "the Snake River"];
 
 function Character(name) {
   this.name = name;
@@ -74,7 +73,7 @@ var fortPrompt = function(inputNumber) {
       rest();
       break;
     case 3:
-      talk();//replace with trade?
+      talk();
       break;
     case 4:
       medicine();
@@ -147,7 +146,7 @@ function fates(roll, rivOrTrail) {
       });
       console.log("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      console.log("ERRORRR");
+      console.log("you've crossed the river")
       return;
     }
   } else {
@@ -163,17 +162,17 @@ function rollNumber(min, max) {
 }
 
 function talk() {
-  var talkRoll = rollNumber(0,4);
-  if(talkRoll===0) {
+  var talkRoll = rollNumber(0, 4);
+  if(talkRoll === 0) {
     console.log("Howdy Yall! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance");
-  }else if(talkRoll===1) {
+  }else if(talkRoll === 1) {
     console.log("Why Hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance");
-  }else if(talkRoll===2) {
+  }else if(talkRoll === 2) {
     console.log("GIMME YA LOOTS YA DARN YANKIES");
-  }else if(talkRoll===3) {
-    console.log("Pardon me, do yall have any spare change?")
+  }else if(talkRoll === 3) {
+    console.log("Pardon me, do yall have any spare change?");
   }else {
-    console.log("talk function error")
+    console.log("talk function error");
   }
 }
 
@@ -212,7 +211,7 @@ function medicine() {
         return;
       }
     });
-    if (lowestHealth === 200) {
+    if (lowestHealth === 1000) {
       console.log("No one is siiiick.")
     } else {
       caravan.party[index].diseases -= 1;
@@ -266,7 +265,6 @@ function travel(rivOrTrail) {
       i--;
     }
   }
-
   game.totalDays++;
   game.daysLeft--;
   console.log(char1, char2, char3, char4, char5, caravan);
@@ -274,10 +272,14 @@ function travel(rivOrTrail) {
   if (game.daysLeft === 0) {  //GAME OVER WIN
     var left = caravan.party.length;
     console.log("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
-  } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort?
+  } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
+    console.log("You've reached " + checkpoints[0] + "!");
+    checkpoints.shift();
     var prom = parseInt(prompt("1 2 or 3"));
     fortPrompt(prom);
-  } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river?
+  } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river
+    console.log("You've reached " + checkpoints[0] + "!");
+    checkpoints.shift();
     var prom = parseInt(prompt("1 2 or 3"));
     riverPrompt(prom);
   } else {
