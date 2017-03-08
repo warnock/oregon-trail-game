@@ -17,7 +17,7 @@ $(document).ready(function() {
     console.log(member4);
   });
 
-  // Trail Screen and For Screen Inputs
+  // Trail Screen and Checkpoint Screen Inputs
   $(".continueOnTrail").click(function() {
     console.log("Continue on Trail click");
 
@@ -36,6 +36,21 @@ $(document).ready(function() {
     console.log("Hunt click");
 
     var option = 3;
+    console.log(option);
+  });
+
+  $(".heal").click(function() {
+    console.log("Heal click");
+
+    var option = 4;
+    console.log(option);
+  });
+
+  // This functions exactly like rest.click
+  $(".mourn").click(function() {
+    console.log("Mourn click");
+
+    var option = 5;
     console.log(option);
   });
 
