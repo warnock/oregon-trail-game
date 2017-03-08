@@ -10,6 +10,9 @@ var caravan = {
   // this.wagonParts = 5;
 }
 
+var forts = ["Fort Laramie", "Fort Bridger"];
+var rivers = ["Big Blue River", "Snake River"];
+
 function Character(name) {
   this.name = name;
   this.health = 100;
@@ -48,7 +51,7 @@ function foodLoss() {
 var trailPrompt = function(inputNumber) {
   switch (inputNumber) {
     case 1:
-      travel();
+      travel("trail");
       break;
     case 2:
       rest();
@@ -65,7 +68,7 @@ var trailPrompt = function(inputNumber) {
 var fortPrompt = function(inputNumber) {
   switch (inputNumber) {
     case 1:
-      travel();
+      travel("trail");
       break;
     case 2:
       rest();
@@ -73,37 +76,84 @@ var fortPrompt = function(inputNumber) {
     case 3:
       talk();//replace with trade?
       break;
+    case 4:
+      medicine();
+      break;
   }
 }
 
-function fates(roll) {
+var riverPrompt = function(inputNumber) {
+  switch (inputNumber) {
+    case 1:
+      travel("river");
+      break;
+    case 2:
+      rest();
+      break;
+    case 3:
+      medicine();
+      break;
+  }
+}
+
+function fates(roll, rivOrTrail) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
-  if(roll<=7) {
-    if(caravan.party[charIndex].diseases > 0){
-      more = "nother";
-    }
-    console.log(caravan.party[charIndex].name+" got a" + more + " disease!");
-    caravan.party[charIndex].diseases += 1;
-  }else if(roll<=14){
-    console.log(caravan.party[charIndex].name+" has broken their foot!");
-    caravan.party[charIndex].health-=50;
-  }else if(roll<=21 && caravan.food > 0){
-    console.log(caravan.party[charIndex].name+" has dropped a lot of food!")
-    caravan.food-=50;
-  }else if(roll>=98) {
-    caravan.food+=50;
-    console.log("Your caravan comes across a field of ripe berries")
-  }else if(roll>=95) {
-    caravan.medicine+=1;
-    console.log("A traveling apothecary has gifted you 2 medicines")
-  }else if(roll>=90) {
-    caravan.party.forEach(function (element) {
-      element.healthGain();
-    });
-    console.log("You find a hot spring! Your party feels more rested")
-  }
 
+  if (rivOrTrail === "trail") {
+    if (roll <= 7) {
+      if (caravan.party[charIndex].diseases > 0){
+        more = "nother";
+      }
+      console.log(caravan.party[charIndex].name+" got a" + more + " disease!");
+      caravan.party[charIndex].diseases += 1;
+    } else if (roll<=14){
+      console.log(caravan.party[charIndex].name+" has broken their foot!");
+      caravan.party[charIndex].health -= 50;
+    } else if (roll<=21 && caravan.food > 0){
+      console.log(caravan.party[charIndex].name+" has dropped a lot of food!");
+      caravan.food -= 50;
+    } else if (roll >= 98) {
+      caravan.food += 50;
+      console.log("Your caravan comes across a field of ripe berries");
+    } else if (roll >= 95) {
+      caravan.medicine += 1;
+      console.log("A traveling apothecary has gifted you 1 medicines");
+    } else if (roll >= 90) {
+      caravan.party.forEach(function (element) {
+        element.healthGain();
+      });
+      console.log("You find a hot spring! Your party feels more rested");
+    }
+  } else if (rivOrTrail === "river") {
+    if (roll <= 1) {
+      caravan.party[charIndex].health = 0;
+      console.log(caravan.party[charIndex].name + " has drowned.");
+    } else if (roll <= 4) {
+      var amount = rollNumber(10, 31);
+      caravan.food -= amount;
+      console.log(caravan.party[charIndex].name + " dropped some food in the river.");
+    } else if (roll <= 7) {
+      caravan.party[charIndex].diseases += 1;
+      console.log(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
+    } else if (roll <= 10 && caravan.party.medicine > 0) {
+      var amount = rollNumber(1, (caravan.party.medicine + 1));
+      caravan.party.medicine -= amount;
+      console.log(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
+    } else if (roll <= 12) {
+      var amount = rollNumber(5, 16);
+      caravan.party.forEach(function(element) {
+        element.health -= amount;
+      });
+      console.log("The river was freezing cold! Everyone loses " + amount + " health.");
+    } else {
+      console.log("ERRORRR");
+      return;
+    }
+  } else {
+    console.log("ERRORRR");
+    return;
+  }
 }
 
 function rollNumber(min, max) {
@@ -197,15 +247,14 @@ function hunt() {
   trailPrompt(prom);
 }
 
-function travel() {
+function travel(rivOrTrail) {
   var roll = rollNumber(1,101);
   console.log(roll);
-  fates(roll);
+  fates(roll, rivOrTrail);
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthLoss();
   });
-
 
   for(var i = 0; i < caravan.party.length; i++) {
     if(caravan.party[i].deathCheck(i)) {
@@ -230,7 +279,7 @@ function travel() {
     fortPrompt(prom);
   } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river?
     var prom = parseInt(prompt("1 2 or 3"));
-    fortPrompt(prom);//TURN INTO RIVER PROMPT!!!!!
+    riverPrompt(prom);
   } else {
     var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
     trailPrompt(prom);
