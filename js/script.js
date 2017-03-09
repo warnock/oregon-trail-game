@@ -329,23 +329,26 @@ $(function() {
   $(".continueOnTrail").click(function() {
     $("#randomEventMessage").empty();
     travel("trail");
-
+    $(".imgHeader").css("background-image", "url(img/trail.jpg)");
     gameChecker();
     console.log(game.daysLeft);
     updateStats();
   });
 
   $(".rest").click(function() {
+    $(".imgHeader").css("background-image", "url(img/rest.png)");
     rest();
     updateStats();
   });
 
   $(".hunt").click(function() {
+    $(".imgHeader").css("background-image", "url(img/hunt.png)");
     hunt();
     updateStats();
   });
 
   $(".heal").click(function() {
+    $(".imgHeader").css("background-image", "url(img/dinosaurtrail.jpg)");
     medicine();
     updateStats();
   });
