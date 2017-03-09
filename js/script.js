@@ -57,6 +57,7 @@ function checkDeath() {
       $(".mourn").show();
       if (caravan.party.length <= 0) {
       $("#event").html("Everyone in your party has died. The game is over.");
+      $(".imgHeader").css("background-image", "url(img/endGameLoser.jpg)");
       return;
       }
       i--;
@@ -65,6 +66,7 @@ function checkDeath() {
   if (deathString) {
     deathString += "Bummer.";
     $("#event").html(deathString);
+    $(".imgHeader").css("background-image", "url(img/deathScreenHeader.jpg)");
   }
 }
 
@@ -156,11 +158,22 @@ function gameChecker() {
   if (game.daysLeft === 0) {  //GAME OVER WIN
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
-  } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
+    $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
+  } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
-  } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river
+  } else if (game.daysLeft === 30) { //10 days from end (and multiples of 20)...river
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $(".imgHeader").css("background-image", "url(img/blueriver.png)");
+    checkpoints.shift();
+  } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $(".imgHeader").css("background-image", "url(img/fortbridger.png)");
+    checkpoints.shift();
+  } else if (game.daysLeft === 10) { //10 days from end (and multiples of 20)...river
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
     checkpoints.shift();
   } else {
     console.log("go ahead and travel");
@@ -304,8 +317,9 @@ $(function() {
 
   $(".continueOnTrail").click(function() {
     $("#randomEventMessage").empty();
-    travel("trail");
+
     $(".imgHeader").css("background-image", "url(img/trail.jpg)");
+    travel("trail");
     gameChecker();
     console.log(game.daysLeft);
     updateStats();
@@ -330,6 +344,7 @@ $(function() {
   });
 
   $(".mourn").click(function() {
+    $(".imgHeader").css("background-image", "url(img/mourn.jpg)");
     console.log("part1");
     restMourn();
     updateStats();
