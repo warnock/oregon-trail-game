@@ -96,14 +96,14 @@ function fates(roll, rivOrTrail) {
       $("#randomEventMessage").text(caravan.party[charIndex].name+" got a" + more + " disease!");
       caravan.party[charIndex].diseases += 1;
     } else if (roll<=14) {
-      $("#randomEventMessage").text("While running from a buffalo " + caravan.party[charIndex].name+" broke their foot!");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " broke a foot while running from a buffalo.");
       caravan.party[charIndex].health -= 50;
     } else if (roll<=18 && caravan.food > 0){
       var amount = rollNumber(20, 51);
       $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after they dropped " + amount + " food!");
       caravan.food -= amount;
     } else if (roll<=21){
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot and contracted a disease.");
+      $("#randomEventMessage").text("There was a snake in " +  caravan.party[charIndex].name + "'s boot. " + caravan.party[charIndex].name + " contracted a disease.");
       caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
