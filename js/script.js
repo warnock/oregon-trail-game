@@ -4,7 +4,7 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 5
+  daysLeft: 50
 };
 
 var caravan = {
@@ -111,26 +111,26 @@ function fates(roll, rivOrTrail) {
   } else if (rivOrTrail === "river") {
     if (roll <= 1) {
       caravan.party[charIndex].health = 0;
-      console.log(caravan.party[charIndex].name + " has drowned.");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " has drowned.");
     } else if (roll <= 4) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
-      console.log(caravan.party[charIndex].name + " dropped some food in the river.");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped some food in the river.");
     } else if (roll <= 7) {
       caravan.party[charIndex].diseases += 1;
-      console.log(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
     } else if (roll <= 10 && caravan.party.medicine > 0) {
       var amount = rollNumber(1, (caravan.party.medicine + 1));
       caravan.party.medicine -= amount;
-      console.log(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
     } else if (roll <= 12) {
       var amount = rollNumber(5, 16);
       caravan.party.forEach(function(element) {
         element.health -= amount;
       });
-      console.log("The river was freezing cold! Everyone loses " + amount + " health.");
+      $("#randomEventMessage").text("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      console.log("you've crossed the river")
+      $("#event").text("Your pary successfully crossed the river")
       return;
     }
   } else {
@@ -174,18 +174,26 @@ function gameChecker() {
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
+    $(".hunt").hide();
+    $(".talk").show();
   } else if (game.daysLeft === 30) { //10 days from end (and multiples of 20)...river
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
     checkpoints.shift();
+    $(".hunt").hide();
+    $(".talk").show();
   } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortbridger.png)");
     checkpoints.shift();
+    $(".hunt").hide();
+    $(".talk").show();
   } else if (game.daysLeft === 10) { //10 days from end (and multiples of 20)...river
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
     checkpoints.shift();
+    $(".hunt").hide();
+    $(".talk").show();
   } else {
     console.log("go ahead and travel");
   }
@@ -267,7 +275,8 @@ function travel(rivOrTrail) {
   checkDeath();
   game.totalDays++;
   game.daysLeft--;
-
+  $(".talk").hide();
+  $(".hunt").show();
 }
 
 
@@ -331,6 +340,15 @@ $(function() {
 
     $(".imgHeader").css("background-image", "url(img/trail.jpg)");
     travel("trail");
+    gameChecker();
+    console.log(game.daysLeft);
+    updateStats();
+  });
+
+  $(".crossRiver").click(function() {
+    $("#randomEventMessage").empty();
+
+    travel("river");
     gameChecker();
     console.log(game.daysLeft);
     updateStats();
