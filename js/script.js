@@ -23,6 +23,9 @@ function Character(name) {
 
 Character.prototype.healthGain = function() {
   this.health += 20;
+  if (this.health > 125) {
+    this.health = 125;
+  }
 }
 
 Character.prototype.healthLoss = function() { //daily health loss
@@ -301,16 +304,24 @@ function travel(rivOrTrail) {
 }
 
 function updateStats() {
-    $(".totalDays").text(game.totalDays);
+  $(".totalDays").text(game.totalDays);
 
-    var nameString = "";
-    caravan.party.forEach(function(member) {
-      nameString += "<li>" + member.name + " || Health: " + member.health + "</li>";
-    });
+  var nameString = "";
+  caravan.party.forEach(function(member) {
+    if (member.diseases < 1) {
+      nameString += "<li>" + member.name + " | Health: " + member.health + "</li>";
+    } else {
+      var plural = "";
+      if (member.diseases > 1) {
+        plural = "s";
+      }
+      nameString += "<li>" + member.name + " | Health: " + member.health + " | " + member.diseases + " Disease" + plural + "</li>";
+    }
+  });
 
-    $(".wagonMembers").html(nameString);
-    $(".food").text(caravan.food);
-    $(".medicine").text(caravan.medicine);
+  $(".wagonMembers").html(nameString);
+  $(".food").text(caravan.food);
+  $(".medicine").text(caravan.medicine);
 }
 
 $(function() {
