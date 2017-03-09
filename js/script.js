@@ -22,7 +22,8 @@ function Character(name) {
 }
 
 Character.prototype.healthGain = function() {
-  this.health += 20;
+  var amount = rollNumber(5, 26);
+  this.health += amount;
   if (this.health > 125) {
     this.health = 125;
   }
