@@ -33,7 +33,7 @@ Character.prototype.healthLoss = function() { //daily health loss
     starvingModifier = 2;
   }
 
-  this.health -= (15 + diseasedModifier) * starvingModifier;
+  this.health -= (3 + diseasedModifier) * starvingModifier;
 }
 
 Character.prototype.deathCheck = function(i) {
@@ -149,13 +149,13 @@ function rollNumber(min, max) {
 function talk() {
   var talkRoll = rollNumber(0, 4);
   if(talkRoll === 0) {
-    console.log("Howdy Yall! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance");
+    $("#event").text("Howdy Yall! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance");
   }else if(talkRoll === 1) {
-    console.log("Why Hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance");
+    $("#event").text("Why Hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance");
   }else if(talkRoll === 2) {
-    console.log("GIMME YA LOOTS YA DARN YANKIES");
+    $("#event").text("GIMME YA LOOTS YA DARN YANKIES");
   }else if(talkRoll === 3) {
-    console.log("Pardon me, do yall have any spare change?");
+    $("#event").text("Pardon me, do yall have any spare change?");
   }else {
     console.log("talk function error");
   }
@@ -163,7 +163,7 @@ function talk() {
 
 function gameChecker() {
   if (game.daysLeft === 0) {  //GAME OVER WIN
-    $("#randomEventMessage").empty();
+    $("#randomEventMessage, #checkPoint").empty();
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
     $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
@@ -171,25 +171,28 @@ function gameChecker() {
     $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
     gameWinSong.play();
   } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
-    $("#randomEventMessage").empty();
+    $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
   } else if (game.daysLeft === 30) { //10 days from end (and multiples of 20)...river
+    $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
   } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
+    $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortbridger.png)");
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
   } else if (game.daysLeft === 10) { //10 days from end (and multiples of 20)...river
+    $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
     checkpoints.shift();
@@ -201,7 +204,7 @@ function gameChecker() {
 }
 
 function medicine() {
-  $("#randomEventMessage").empty();
+  $("#randomEventMessage, #checkPoint").empty();
   if (caravan.medicine <= 0) {
     $("#event").html("You have 0 medicines.");
   } else {
@@ -230,7 +233,7 @@ function medicine() {
   return;
 }
 function restMourn() {
-  $("#randomEventMessage").empty();
+  $("#randomEventMessage, #checkPoint").empty();
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthGain();
@@ -238,11 +241,11 @@ function restMourn() {
   $("#event").html("Your party mourns the loss of a fallen party member.");
   game.totalDays++;
   $(".mourn").hide();
-  $(".rest").show
+  $(".rest").show();
 }
 
 function rest() {
-  $("#randomEventMessage").empty();
+  $("#randomEventMessage, #checkPoint").empty();
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthGain();
@@ -252,7 +255,7 @@ function rest() {
 }
 
 function hunt() {
-  $("#randomEventMessage").empty();
+  $("#randomEventMessage, #checkPoint").empty();
   var meatGained = rollNumber(1, 10);
   caravan.food += meatGained * caravan.party.length;
   $("#event").html("Everyone in your party gathered "+meatGained+" foods!");
@@ -337,7 +340,7 @@ $(function() {
   });
 
   $(".continueOnTrail").click(function() {
-    $("#randomEventMessage").empty();
+    $("#randomEventMessage, #checkPoint").empty();
 
     $(".imgHeader").css("background-image", "url(img/trail.jpg)");
     travel("trail");
@@ -347,7 +350,7 @@ $(function() {
   });
 
   $(".crossRiver").click(function() {
-    $("#randomEventMessage").empty();
+    $("#randomEventMessage, #checkPoint").empty();
 
     travel("river");
     gameChecker();
@@ -378,6 +381,10 @@ $(function() {
     console.log("part1");
     restMourn();
     updateStats();
+  });
+
+  $(".talk").click(function() {
+    talk();
   })
 
 
