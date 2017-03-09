@@ -341,6 +341,14 @@ $(function() {
     var char5 = new Character(member4);
     caravan.party.push(char1, char2, char3, char4, char5);
 
+    var autoNames = ["Ryan", "Gloria", "Riley", "Megan", "Chris"];
+    caravan.party.forEach(function(member) {
+      if (!member.name) {
+        member.name = autoNames[0];
+        autoNames.shift();
+      }
+    })
+
     updateStats();
     $("#homeScreen").hide();
     $("#gameScreen").show();
