@@ -35,7 +35,8 @@ ul {
 .randomEvent {
   text-align: center;
   border: dotted 2px #00C100;
-  height: 60px;
+  height: auto;
+  min-height: 60px;
 }
 
 .statsBox {
@@ -45,7 +46,8 @@ ul {
   border-bottom-style: dashed;
   border-color: #00C100;
   border-size: 3px;
-  height: 524px;
+  height: auto;
+  min-height: 524px;
 }
 
 .statsBox h2 {
