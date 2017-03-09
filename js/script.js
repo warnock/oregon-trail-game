@@ -99,14 +99,15 @@ function fates(roll, rivOrTrail) {
       $("#randomEventMessage").text("While running from a buffalo " + caravan.party[charIndex].name+" broke their foot!");
       caravan.party[charIndex].health -= 50;
     } else if (roll<=18 && caravan.food > 0){
-      $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after they dropped a bushel of food!");
-      caravan.food -= 50;
+      var amount = rollNumber(20, 51);
+      $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after they dropped " + amount + " food!");
+      caravan.food -= amount;
     } else if (roll<=21){
       $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot and contracted a disease.");
       caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
-      $("#randomEventMessage").text("Your caravan came across a field of ripe, delicous berries.");
+      $("#randomEventMessage").text("Your caravan came across a field of ripe, delicous berries. You gain 50 food!");
     } else if (roll >= 95) {
       caravan.medicine += 1;
       $("#randomEventMessage").text("A generous, traveling apothecary has gifted you 1 medicine.");
@@ -125,7 +126,7 @@ function fates(roll, rivOrTrail) {
     } else if (roll <= 17) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
-      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped food in the river.");
+      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped " + amount + " food in the river.");
     } else if (roll <= 25) {
       caravan.party[charIndex].diseases += 1;
       $("#randomEventMessage").text(caravan.party[charIndex].name + "  contracted a disease from the dirty river.");
@@ -140,7 +141,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      $("#event").text("Your pary successfully crossed the river. Onward to Oregon.")
+      $("#event").text("Your party successfully crossed the river. Onward to Oregon.")
       return;
     }
   } else {
