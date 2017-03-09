@@ -11,7 +11,6 @@ var caravan = {
   party: [],
   food: 200,
   medicine: 5
-  // this.wagonParts = 5;
 }
 
 var checkpoints = ["Fort Laramie", "the Big Blue River", "Fort Bridger", "the Snake River"];
@@ -37,7 +36,6 @@ Character.prototype.healthLoss = function() { //daily health loss
 }
 
 Character.prototype.deathCheck = function(i) {
-  // debugger;
   if(this.health<=0) {
     return true;
   }
@@ -52,7 +50,9 @@ function foodLoss() {
 }
 
 function checkDeath() {
+
   var deathString = "";
+
   for(var i = 0; i < caravan.party.length; i++) {
     if(caravan.party[i].deathCheck(i)) {
       deathString += caravan.party[i].name + " has died. ";
@@ -72,6 +72,7 @@ function checkDeath() {
       i--;
     }
   }
+
   if (deathString) {
     deathString += "Bummer.";
     $("#event").html(deathString);
@@ -86,12 +87,12 @@ function fates(roll, rivOrTrail) {
 
   if (rivOrTrail === "trail") {
     if (roll <= 10) {
-      if (caravan.party[charIndex].diseases > 0){
+      if (caravan.party[charIndex].diseases > 0) {
         more = "nother";
       }
       $("#randomEventMessage").text(caravan.party[charIndex].name+" got a" + more + " disease!");
       caravan.party[charIndex].diseases += 1;
-    } else if (roll<=14){
+    } else if (roll<=14) {
       $("#randomEventMessage").text(caravan.party[charIndex].name+" has broken their foot!");
       caravan.party[charIndex].health -= 50;
     } else if (roll<=18 && caravan.food > 0){
@@ -167,7 +168,7 @@ function talk() {
 }
 
 function gameChecker() {
-  if (game.daysLeft === 0) {  //GAME OVER WIN
+  if (game.daysLeft === 0) {  // GAME OVER WIN
     $("#randomEventMessage, #checkPoint").empty();
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
@@ -175,14 +176,14 @@ function gameChecker() {
     $(".restartGame").show();
     $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
     gameWinSong.play();
-  } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
+  } else if (game.daysLeft === 40) { // 40 days from end (and multiples of 20)...fort
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
-  } else if (game.daysLeft === 30) { //10 days from end (and multiples of 20)...river
+  } else if (game.daysLeft === 30) { // 30 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
@@ -190,14 +191,14 @@ function gameChecker() {
     $(".hunt").hide();
     $(".continueOnTrail").hide();
     $(".crossRiver").show();
-  } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
+  } else if (game.daysLeft === 20) { // 20 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortbridger.png)");
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
-  } else if (game.daysLeft === 10) { //10 days from end (and multiples of 20)...river
+  } else if (game.daysLeft === 10) { // 10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
@@ -239,6 +240,7 @@ function medicine() {
   }
   return;
 }
+
 function restMourn() {
   $("#randomEventMessage, #checkPoint").empty();
   foodLoss();
@@ -289,26 +291,6 @@ function travel(rivOrTrail) {
   $(".talk").hide();
   $(".hunt").show();
 }
-
-
-
-//where things go to die
-// function medicine() {
-//   if (caravan.medicine <= 0){
-//     console.log("You have 0 medicines.")
-//   } else {
-//     patientIndex = parseInt(prompt("Who to heal? 1-5?")) - 1;
-//     if (caravan.party[patientIndex].diseases < 1) {
-//       console.log(caravan.party[patientIndex].name + " is not sick! Psh.")
-//     } else {
-//       caravan.medicine -= 1;
-//       caravan.party[patientIndex].diseases -= 1;
-//       console.log("You have successfully removed a disease from " + caravan.party[patientIndex].name + "'s body.")
-//     }
-//   }
-//   var prom = parseInt(prompt("1)Travel 2)Rest 3)Hunt 4)Heal"));
-//   trailPrompt(prom);
-// }
 
 function updateStats() {
     $(".totalDays").text(game.totalDays);
@@ -395,6 +377,5 @@ $(function() {
   $(".talk").click(function() {
     talk();
   })
-
 
 })
