@@ -115,21 +115,21 @@ function fates(roll, rivOrTrail) {
       $("#event").html("You advance a day");
     }
   } else if (rivOrTrail === "river") {
-    if (roll <= 1) {
+    if (roll <= 10) {
       caravan.party[charIndex].health = 0;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " has drowned.");
-    } else if (roll <= 7) {
+    } else if (roll <= 17) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped some food in the river.");
-    } else if (roll <= 12) {
+    } else if (roll <= 25) {
       caravan.party[charIndex].diseases += 1;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
-    } else if (roll <= 15 && caravan.party.medicine > 0) {
+    } else if (roll <= 36 && caravan.party.medicine > 0) {
       var amount = rollNumber(1, (caravan.party.medicine + 1));
       caravan.party.medicine -= amount;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
-    } else if (roll <= 19) {
+    } else if (roll <= 50) {
       var amount = rollNumber(5, 16);
       caravan.party.forEach(function(element) {
         element.health -= amount;
