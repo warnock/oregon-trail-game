@@ -341,13 +341,14 @@ $(function() {
     var char5 = new Character(member4);
     caravan.party.push(char1, char2, char3, char4, char5);
 
-    var autoNames = ["Ryan", "Gloria", "Riley", "Megan", "Chris"];
+    var autoNames = ["Ryan", "Gloria", "Riley", "Megan", "Chris", "Colin", "Blake", "Grace", "Ben", "Mark", "Liam", "Shane", "Christian", "Chance", "Oliver", "Evan", "Perry", "Dallas", "Alex", "Xi Xia", "Jahan", "Kaya", "Josh", "Nathaniel", "Janek", "Clifford", "Cameron", "Keith", "Pizza", "Stormi"];
     caravan.party.forEach(function(member) {
       if (!member.name) {
-        member.name = autoNames[0];
-        autoNames.shift();
+        var index = rollNumber(0, autoNames.length);
+        member.name = autoNames[index];
+        autoNames.splice(index, 1);
       }
-    })
+    });
 
     updateStats();
     $("#homeScreen").hide();
