@@ -23,6 +23,9 @@ function Character(name) {
 
 Character.prototype.healthGain = function() {
   this.health += 20;
+  if (this.health > 125) {
+    this.health = 125;
+  }
 }
 
 Character.prototype.healthLoss = function() { //daily health loss
