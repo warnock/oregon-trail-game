@@ -1,6 +1,6 @@
 var game = {
   totalDays: 0,
-  daysLeft: 25
+  daysLeft: 50
 };
 
 var caravan = {
@@ -29,7 +29,7 @@ Character.prototype.healthLoss = function() { //daily health loss
     starvingModifier = 2;
   }
 
-  this.health -= (5 + diseasedModifier) * starvingModifier;
+  this.health -= (15 + diseasedModifier) * starvingModifier;
 }
 
 Character.prototype.deathCheck = function(i) {
@@ -48,69 +48,30 @@ function foodLoss() {
 }
 
 function checkDeath() {
+  var deathString = "";
   for(var i = 0; i < caravan.party.length; i++) {
     if(caravan.party[i].deathCheck(i)) {
-      console.log(caravan.party[i].name + " has died. Sorry about it.");
+      deathString += caravan.party[i].name + " has died. ";
       caravan.party.splice(i, 1);
+      $(".rest").hide();
+      $(".mourn").show();
       if (caravan.party.length <= 0) {
-        console.log("Everyone in your party has died. The party is over.");
+      $("#event").html("Everyone in your party has died. The game is over.");
+      return;
       }
       i--;
     }
   }
-}
-
-var trailPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("trail");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      hunt();
-      break;
-    case 4:
-      medicine();
-      break;
-  }
-}
-
-var fortPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("trail");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      talk();
-      break;
-    case 4:
-      medicine();
-      break;
-  }
-}
-
-var riverPrompt = function(inputNumber) {
-  switch (inputNumber) {
-    case 1:
-      travel("river");
-      break;
-    case 2:
-      rest();
-      break;
-    case 3:
-      medicine();
-      break;
+  if (deathString) {
+    deathString += "Bummer.";
+    $("#event").html(deathString);
   }
 }
 
 function fates(roll, rivOrTrail) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
+  $("#event").html("You advance a day");
 
   if (rivOrTrail === "trail") {
     if (roll <= 7) {
@@ -137,7 +98,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("You find a hot spring! Your party feels more rested");
     } else {
-      $("#trailHappen").text("You advance a day");
+      $("#event").html("You advance a day");
     }
   } else if (rivOrTrail === "river") {
     if (roll <= 1) {
@@ -194,12 +155,12 @@ function talk() {
 function gameChecker() {
   if (game.daysLeft === 0) {  //GAME OVER WIN
     var left = caravan.party.length;
-    $("#trailHappen").text("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
+    $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
   } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
-    $("#trailHappen").text("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     checkpoints.shift();
   } else if (game.daysLeft % 10 === 0) { //10 days from end (and multiples of 20)...river
-    $("#trailHappen").text("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     checkpoints.shift();
   } else {
     console.log("go ahead and travel");
@@ -207,8 +168,9 @@ function gameChecker() {
 }
 
 function medicine() {
+  $("#randomEventMessage").empty();
   if (caravan.medicine <= 0) {
-    $("#trailHappen").text("You have 0 medicines.");
+    $("#event").html("You have 0 medicines.");
   } else {
     var index;
     var lowestHealth = 1000;
@@ -225,29 +187,42 @@ function medicine() {
       }
     });
     if (lowestHealth === 1000) {
-      $("#trailHappen").text("No one is siiiick.");
+      $("#event").html("No one is siiiick.");
     } else {
       caravan.party[index].diseases -= 1;
       caravan.medicine -= 1;
-      $("#trailHappen").text(caravan.party[index].name + " has been healed 1 disease.");
+      $("#event").html(caravan.party[index].name + " has been healed 1 disease.");
     }
   }
   return;
 }
-
-function rest() {
+function restMourn() {
+  $("#randomEventMessage").empty();
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthGain();
   });
-  $("#trailHappen").text("Your party decides to rest for the day ahead.");
+  $("#event").html("Your party mourns the loss of a fallen party member.");
+  game.totalDays++;
+  $(".mourn").hide();
+  $(".rest").show();
+}
+
+function rest() {
+  $("#randomEventMessage").empty();
+  foodLoss();
+  caravan.party.forEach(function (element) {
+    element.healthGain();
+  });
+  $("#event").html("Your party decides to rest for the day ahead.");
   game.totalDays++;
 }
 
 function hunt() {
+  $("#randomEventMessage").empty();
   var meatGained = rollNumber(1, 10);
   caravan.food += meatGained * caravan.party.length;
-  $("#trailHappen").text("Everyone in your party gathered "+meatGained+" foods!");
+  $("#event").html("Everyone in your party gathered "+meatGained+" foods!");
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthLoss();
@@ -271,12 +246,7 @@ function travel(rivOrTrail) {
 
 }
 
-var char1 = new Character("Ryan");
-var char2 = new Character("Riley");
-var char3 = new Character("Chris");
-var char4 = new Character("Gloria");
-var char5 = new Character("Megan");
-caravan.party.push(char1, char2, char3, char4, char5);
+
 
 //where things go to die
 // function medicine() {
@@ -319,11 +289,17 @@ $(function() {
     var member3 = $("#addMember3").val();
     var member4 = $("#addMember4").val();
 
-    console.log(wagonLeader);
-    console.log(member1);
-    console.log(member2);
-    console.log(member3);
-    console.log(member4);
+    var char1 = new Character(wagonLeader);
+    var char2 = new Character(member1);
+    var char3 = new Character(member2);
+    var char4 = new Character(member3);
+    var char5 = new Character(member4);
+    caravan.party.push(char1, char2, char3, char4, char5);
+
+    updateStats();
+    $("#homeScreen").hide();
+    $("#GameScreen").show();
+
   });
 
   $(".continueOnTrail").click(function() {
@@ -352,6 +328,12 @@ $(function() {
     medicine();
     updateStats();
   });
+
+  $(".mourn").click(function() {
+    console.log("part1");
+    restMourn();
+    updateStats();
+  })
 
 
 })

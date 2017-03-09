@@ -25,7 +25,7 @@ ul {
 }
 
 #homeScreen {
-  display: none;
+
 }
 
 .randomEvent {
@@ -106,4 +106,5 @@ label {
 span#randomEventMessage {
   font-size: 40px;
   padding-top: 20px;
+>>>>>>> 8944430838ecedd823e7c4f047de28875ac224ab
 }
