@@ -4,7 +4,7 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 50
+  daysLeft: 5
 };
 
 var caravan = {
@@ -163,6 +163,8 @@ function gameChecker() {
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
     $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
+    $(".restartGame").show();
+    $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
   } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
     gameWinSong.play();
   } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
@@ -317,7 +319,7 @@ $(function() {
 
     updateStats();
     $("#homeScreen").hide();
-    $("#GameScreen").show();
+    $("#gameScreen").show();
 
   });
 

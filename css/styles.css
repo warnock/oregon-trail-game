@@ -24,8 +24,12 @@ ul {
   font-size: 25px;
 }
 
-#homeScreen {
+#gameScreen {
+  display: none;
+}
 
+.mourn, .talk, .restartGame {
+  display: none;
 }
 
 .randomEvent {
@@ -110,4 +114,8 @@ span#randomEventMessage {
 
 .events {
   font-size: 40px;
+}
+
+a {
+  margin-top: 20px;
 }
