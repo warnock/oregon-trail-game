@@ -59,6 +59,7 @@ function checkDeath() {
       caravan.party.splice(i, 1);
       $(".rest").hide();
       $(".mourn").show();
+      $(".mourn").css("display", "inline-block");
       if (caravan.party.length <= 0) {
       $("#event").html("Everyone in your party has died. The game is over.");
       $(".imgHeader").css("background-image", "url(img/endGameLoser.jpg)");
@@ -237,7 +238,7 @@ function restMourn() {
   $("#event").html("Your party mourns the loss of a fallen party member.");
   game.totalDays++;
   $(".mourn").hide();
-  $(".rest").show();
+  $(".rest").show
 }
 
 function rest() {
