@@ -15,7 +15,9 @@ html, body {
   height: 350px;
   width: 100%;
 }
-
+h2 {
+  font-size: 42px;
+}
 ul {
   font-size: 25px;
 }
@@ -24,9 +26,7 @@ ul {
   display: none;
 }
 
-#homeScreen {
-  display: none;
-}
+
 
 .randomEvent {
   text-align: center;
@@ -41,11 +41,22 @@ ul {
   border-bottom-style: dashed;
   border-color: #00C100;
   border-size: 3px;
-  height: 500px;
+  height: 524px;
+}
+
+.statsBox h2 {
+  color: #0076ff;
+  margin: 10px 0;
+}
+
+.statsBox h1 {
+  margin: 0;
+  font-size: 85px;;
+  color: #D103D5;
 }
 
 input[type = "text"] {
-  background-color: blue;
+  background-color: #0076ff;
   border: dashed 1px;
   color: white;
   width: 300px;
@@ -55,13 +66,7 @@ label {
   font-size: 20px;
 }
 
-button:hover {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
-}
-
-button, span.continueOnTrail, .hunt, .rest, .heal, .mourn, .restartGame {
+.btn, button {
   color: black;
   background-color: #00C100;
   padding: 10px;
@@ -71,21 +76,14 @@ button, span.continueOnTrail, .hunt, .rest, .heal, .mourn, .restartGame {
   border: solid 5px white;
 }
 
+.btn:hover, {
+  background-color: #0076ff;
+  color: white;
+}
+
 #trailScreen {
   padding-top: 35px;
   padding-left: 35px;
-}
-
-h3 {
-  font-size: 30px;
-}
-
-h2 {
-  font-size: 50px;
-}
-
-p {
-  font-size: 20px;
 }
 
 .restOutcome, .trailOutcome, .healOutcome, .mournOutcome, .huntOutcome, .gameOverLoseMessage, .gameOverWinScreen {
@@ -94,4 +92,17 @@ p {
   border: solid 3px blue;
   border-radius: 5px;
   padding-left: 20px;
+}
+
+.options {
+  margin-top: 20px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
+span#randomEventMessage {
+  font-size: 40px;
+  padding-top: 20px;
 }

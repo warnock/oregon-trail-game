@@ -301,7 +301,7 @@ function updateStats() {
 
     var nameString = "";
     caravan.party.forEach(function(member) {
-      nameString += "<li>" + member.name + " (" + member.health + ")</li>";
+      nameString += "<li>" + member.name + " || Health: " + member.health + "</li>";
     });
 
     $(".wagonMembers").html(nameString);
