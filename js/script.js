@@ -99,7 +99,7 @@ function fates(roll, rivOrTrail) {
       $("#randomEventMessage").text(caravan.party[charIndex].name+" has dropped a lot of food!");
       caravan.food -= 50;
     } else if (roll<=21){
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot! They were bitten and poisoned (disease)");
+      $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot!");
       caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
@@ -192,6 +192,7 @@ function gameChecker() {
     $(".hunt").hide();
     $(".continueOnTrail").hide();
     $(".crossRiver").show();
+    $(".crossRiver").css("display", "inline-block");
     $(".talk").show();
     $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 20) { // 20 days from end (and multiples of 20)...river
@@ -210,6 +211,7 @@ function gameChecker() {
     $(".hunt").hide();
     $(".continueOnTrail").hide();
     $(".crossRiver").show();
+    $(".crossRiver").css("display", "inline-block");
     $(".talk").show();
     $(".talk").css("display", "inline-block");
   } else {
