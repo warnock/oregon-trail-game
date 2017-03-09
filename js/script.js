@@ -61,6 +61,7 @@ function checkDeath() {
       $(".mourn").show();
       $(".mourn").css("display", "inline-block");
       if (caravan.party.length <= 0) {
+      $("#randomEventMessage, #checkPoint").empty();
       $("#event").html("Everyone in your party has died. The game is over.");
       $(".imgHeader").css("background-image", "url(img/endGameLoser.jpg)");
       $(".restartGame").show();
@@ -92,16 +93,19 @@ function fates(roll, rivOrTrail) {
     } else if (roll<=14){
       $("#randomEventMessage").text(caravan.party[charIndex].name+" has broken their foot!");
       caravan.party[charIndex].health -= 50;
-    } else if (roll<=21 && caravan.food > 0){
+    } else if (roll<=18 && caravan.food > 0){
       $("#randomEventMessage").text(caravan.party[charIndex].name+" has dropped a lot of food!");
       caravan.food -= 50;
+    } else if (roll<=21){
+      $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot! They were bitten and poisoned (disease)");
+      caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
       $("#randomEventMessage").text("Your caravan comes across a field of ripe berries");
     } else if (roll >= 95) {
       caravan.medicine += 1;
       $("#randomEventMessage").text("A traveling apothecary has gifted you 1 medicines");
-    } else if (roll >= 90) {
+    } else if (roll >= 92) {
       caravan.party.forEach(function (element) {
         element.healthGain();
       });
@@ -113,18 +117,18 @@ function fates(roll, rivOrTrail) {
     if (roll <= 1) {
       caravan.party[charIndex].health = 0;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " has drowned.");
-    } else if (roll <= 4) {
+    } else if (roll <= 7) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped some food in the river.");
-    } else if (roll <= 7) {
+    } else if (roll <= 12) {
       caravan.party[charIndex].diseases += 1;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
-    } else if (roll <= 10 && caravan.party.medicine > 0) {
+    } else if (roll <= 15 && caravan.party.medicine > 0) {
       var amount = rollNumber(1, (caravan.party.medicine + 1));
       caravan.party.medicine -= amount;
       $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
-    } else if (roll <= 12) {
+    } else if (roll <= 19) {
       var amount = rollNumber(5, 16);
       caravan.party.forEach(function(element) {
         element.health -= amount;
