@@ -127,7 +127,7 @@ function fates(roll, rivOrTrail) {
     } else if (roll <= 17) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
-      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped food in the river.");
+      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped " + amount + " food in the river.");
     } else if (roll <= 25) {
       caravan.party[charIndex].diseases += 1;
       $("#randomEventMessage").text(caravan.party[charIndex].name + "  contracted a disease from the dirty river.");
@@ -142,7 +142,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      $("#event").text("Your pary successfully crossed the river. Onward to Oregon.")
+      $("#event").text("Your party successfully crossed the river. Onward to Oregon.")
       return;
     }
   } else {
