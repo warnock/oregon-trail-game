@@ -4,7 +4,7 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 2
+  daysLeft: 50
 };
 
 var caravan = {
