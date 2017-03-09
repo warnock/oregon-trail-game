@@ -62,10 +62,11 @@ function checkDeath() {
       $(".mourn").css("display", "inline-block");
       if (caravan.party.length <= 0) {
       $("#randomEventMessage, #checkPoint").empty();
+      $("#gameScreen").hide();
       $("#event").html("Everyone in your party has died. The game is over.");
       $(".imgHeader").css("background-image", "url(img/endGameLoser.jpg)");
       $(".restartGame").show();
-      $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
+
       return;
       }
       i--;
