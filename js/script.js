@@ -4,7 +4,9 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 50
+  daysLeft: 50,
+  imgArray: ["url(img/trail.jpg)", "url(img/trail2.jpg)", "url(img/trail3.jpg)"],
+  imgArrayIndex: 0
 };
 
 var caravan = {
@@ -33,7 +35,7 @@ Character.prototype.healthLoss = function() { //daily health loss
   var starvingModifier = 1;
   var diseasedModifier = this.diseases * 2;
   if (caravan.food <= 0) {
-    starvingModifier = 2;
+    starvingModifier = 3;
   }
 
   this.health -= (3 + diseasedModifier) * starvingModifier;
@@ -280,7 +282,7 @@ function rest() {
 
 function hunt() {
   $("#randomEventMessage, #checkPoint").empty();
-  var meatGained = rollNumber(1, 10);
+  var meatGained = rollNumber(4, 16);
   caravan.food += meatGained * caravan.party.length;
   $("#event").html("Everyone in your party gathered "+meatGained+" food!");
   foodLoss();
@@ -376,7 +378,13 @@ $(function() {
   $(".continueOnTrail").click(function() {
     $("#randomEventMessage, #checkPoint").empty();
 
-    $(".imgHeader").css("background-image", "url(img/trail.jpg)");
+    $(".imgHeader").css("background-image", game.imgArray[game.imgArrayIndex]);
+    if(game.imgArrayIndex < 2) {
+      game.imgArrayIndex++;
+    } else {
+      game.imgArrayIndex = 0;
+    }
+
     travel("trail");
     gameChecker();
     console.log(game.daysLeft);
