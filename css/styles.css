@@ -25,7 +25,7 @@ ul {
 }
 
 #homeScreen {
-  
+
 }
 
 .randomEvent {
@@ -94,4 +94,12 @@ p {
   border: solid 3px blue;
   border-radius: 5px;
   padding-left: 20px;
+}
+
+.mourn, .restartGame {
+  display: none;
+}
+
+#GameScreen {
+  display: none;
 }
