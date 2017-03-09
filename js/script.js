@@ -318,7 +318,7 @@ function updateStats() {
       if (member.diseases > 1) {
         plural = "s";
       }
-      nameString += "<li>" + member.name + " | Health: " + member.health + " | " + member.diseases + " Disease" + plural + "</li>";
+      nameString += "<li><span id='memberSick'>" + member.name + " | Health: " + member.health + " | " + member.diseases + " Disease" + plural + "</span></li>";
     }
   });
 
