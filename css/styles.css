@@ -15,18 +15,18 @@ html, body {
   height: 350px;
   width: 100%;
 }
+
 h2 {
   font-size: 42px;
 }
+
 ul {
   font-size: 25px;
 }
 
-#trailScreen, #checkpointScreen, #deathScreen, #gameOverLoseScreen, #gameOverWinScreen {
+#homeScreen {
   display: none;
 }
-
-
 
 .randomEvent {
   text-align: center;
@@ -74,6 +74,7 @@ label {
   font-size: 25px;
   border-radius: 5px;
   border: solid 5px white;
+  width: 175px;
 }
 
 .btn:hover, {
