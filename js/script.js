@@ -62,6 +62,8 @@ function checkDeath() {
       if (caravan.party.length <= 0) {
       $("#event").html("Everyone in your party has died. The game is over.");
       $(".imgHeader").css("background-image", "url(img/endGameLoser.jpg)");
+      $(".restartGame").show();
+      $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
       return;
       }
       i--;
@@ -160,14 +162,15 @@ function talk() {
 
 function gameChecker() {
   if (game.daysLeft === 0) {  //GAME OVER WIN
+    $("#randomEventMessage").empty();
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
     $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
     $(".restartGame").show();
     $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
-  } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
     gameWinSong.play();
-  } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
+  } else if (game.daysLeft === 40) { //20 days from end (and multiples of 20)...fort
+    $("#randomEventMessage").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
