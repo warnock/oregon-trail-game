@@ -4,7 +4,7 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 50
+  daysLeft: 2
 };
 
 var caravan = {
@@ -86,16 +86,14 @@ function checkDeath() {
 function fates(roll, rivOrTrail) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
-  $("#event").html("Though the journey may be rough, you have continued on your trail.");
+  $("#event").html("You advance a day");
 
   if (rivOrTrail === "trail") {
     if (roll <= 10) {
       if (caravan.party[charIndex].diseases > 0) {
         more = "nother";
       }
-      var diseaseNames = ["dysentery", "cholera", "typhoid", "measles", "diphtheria", "scurvy"];
-      var diseaseIndex = rollNumber(0, diseaseNames.length);
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" contracted " + diseaseNames[diseaseIndex] + "!");
+      $("#randomEventMessage").text(caravan.party[charIndex].name+" got a" + more + " disease!");
       caravan.party[charIndex].diseases += 1;
     } else if (roll<=14) {
       $("#randomEventMessage").text(caravan.party[charIndex].name+" has broken their foot!");
@@ -118,7 +116,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("You find a hot spring! Your party feels more rested");
     } else {
-      $("#event").html("You have traveled a day and are one step closer to Oregon.");
+      $("#event").html("You advance a day");
     }
   } else if (rivOrTrail === "river") {
     if (roll <= 10) {
