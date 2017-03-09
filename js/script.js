@@ -1,3 +1,7 @@
+var gameStartSong = new Audio('audio/music.wav');
+var gameWinSong = new Audio('audio/win.wav');
+gameStartSong.play();
+
 var game = {
   totalDays: 0,
   daysLeft: 50
@@ -156,6 +160,7 @@ function gameChecker() {
   if (game.daysLeft === 0) {  //GAME OVER WIN
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
+    gameWinSong.play();
   } else if (game.daysLeft % 20 === 0) { //20 days from end (and multiples of 20)...fort
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     checkpoints.shift();
