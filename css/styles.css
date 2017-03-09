@@ -153,3 +153,7 @@ a:hover {
 #memberSick {
   color: #00C100;
 }
+
+#foodZero, #medicineZero {
+  color: red;
+}

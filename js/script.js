@@ -323,8 +323,22 @@ function updateStats() {
   });
 
   $(".wagonMembers").html(nameString);
-  $(".food").text(caravan.food);
-  $(".medicine").text(caravan.medicine);
+
+  var foodString = "";
+  if (caravan.food <= 0) {
+    foodString = "<span id='foodZero'>Food: 0</span>";
+  } else {
+    foodString = "Food: " + caravan.food;
+  }
+  $(".food").html(foodString);
+
+  var medString = "";
+  if (caravan.medicine <= 0) {
+    medString = "<span id='foodZero'>Medicine: 0</span>";
+  } else {
+    medString = "Medicine: " + caravan.medicine;
+  }
+  $(".medicine").html(medString);
 }
 
 $(function() {
