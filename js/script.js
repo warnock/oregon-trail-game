@@ -4,7 +4,7 @@ gameStartSong.play();
 
 var game = {
   totalDays: 0,
-  daysLeft: 50
+  daysLeft: 2
 };
 
 var caravan = {
@@ -172,7 +172,7 @@ function talk() {
 
 function gameChecker() {
   if (game.daysLeft === 0) {  // GAME OVER WIN
-    $("#randomEventMessage, #checkPoint").empty();
+    $("#randomEventMessage, #checkPoint, #event").empty();
     var left = caravan.party.length;
     $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
     $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
