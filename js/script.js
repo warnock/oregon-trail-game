@@ -96,25 +96,26 @@ function fates(roll, rivOrTrail) {
       $("#randomEventMessage").text(caravan.party[charIndex].name+" got a" + more + " disease!");
       caravan.party[charIndex].diseases += 1;
     } else if (roll<=14) {
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" has broken their foot!");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " broke a foot while running from a buffalo.");
       caravan.party[charIndex].health -= 50;
     } else if (roll<=18 && caravan.food > 0){
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" has dropped a lot of food!");
-      caravan.food -= 50;
+      var amount = rollNumber(20, 51);
+      $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after they dropped " + amount + " food!");
+      caravan.food -= amount;
     } else if (roll<=21){
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" found a snake in their boot!");
+      $("#randomEventMessage").text("There was a snake in " +  caravan.party[charIndex].name + "'s boot. " + caravan.party[charIndex].name + " contracted a disease.");
       caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
-      $("#randomEventMessage").text("Your caravan comes across a field of ripe berries");
+      $("#randomEventMessage").text("Your caravan came across a field of ripe, delicous berries. You gain 50 food!");
     } else if (roll >= 95) {
       caravan.medicine += 1;
-      $("#randomEventMessage").text("A traveling apothecary has gifted you 1 medicines");
+      $("#randomEventMessage").text("A generous, traveling apothecary has gifted you 1 medicine.");
     } else if (roll >= 92) {
       caravan.party.forEach(function (element) {
         element.healthGain();
       });
-      $("#randomEventMessage").text("You find a hot spring! Your party feels more rested");
+      $("#randomEventMessage").text("You found a not-too-hot hot spring! Your party feels more rested.");
     } else {
       $("#event").html("You advance a day");
     }
@@ -125,14 +126,14 @@ function fates(roll, rivOrTrail) {
     } else if (roll <= 17) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
-      $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped some food in the river.");
+      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped " + amount + " food in the river.");
     } else if (roll <= 25) {
       caravan.party[charIndex].diseases += 1;
-      $("#randomEventMessage").text(caravan.party[charIndex].name + " has contracted a disease from the dirty river.");
+      $("#randomEventMessage").text(caravan.party[charIndex].name + "  contracted a disease from the dirty river.");
     } else if (roll <= 36 && caravan.party.medicine > 0) {
       var amount = rollNumber(1, (caravan.party.medicine + 1));
       caravan.party.medicine -= amount;
-      $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped " + amount + " medicines.")
+      $("#randomEventMessage").text(caravan.party[charIndex].name + " dropped " + amount + " medicines. Everyone seems pretty upset.")
     } else if (roll <= 50) {
       var amount = rollNumber(5, 16);
       caravan.party.forEach(function(element) {
@@ -140,7 +141,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      $("#event").text("Your pary successfully crossed the river")
+      $("#event").text("Your party successfully crossed the river. Onward to Oregon.")
       return;
     }
   } else {
@@ -158,13 +159,13 @@ function rollNumber(min, max) {
 function talk() {
   var talkRoll = rollNumber(0, 4);
   if(talkRoll === 0) {
-    $("#event").text("Howdy Yall! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance");
+    $("#event").text("Howdy, Y'all! My name is Jeremy Yetternutter, I'm the town blacksmith. It's a pleasure making your aquaintance.");
   }else if(talkRoll === 1) {
-    $("#event").text("Why Hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance");
+    $("#event").text("Why, hello there! My name is Jebediah Yankles, I'm the Mayor in these here parts. It's a pleasure making your aquaintance.");
   }else if(talkRoll === 2) {
-    $("#event").text("GIMME YA LOOTS YA DARN YANKIES");
+    $("#event").text("GIMME YA LOOTS YA DARN YANKIES. THIS HERE'S A STICK UP.");
   }else if(talkRoll === 3) {
-    $("#event").text("Pardon me, do yall have any spare change?");
+    $("#event").text("Pardon me, do y'all have any spare change?");
   }else {
     console.log("talk function error");
   }
@@ -174,14 +175,14 @@ function gameChecker() {
   if (game.daysLeft === 0) {  // GAME OVER WIN
     $("#randomEventMessage, #checkPoint, #event").empty();
     var left = caravan.party.length;
-    $("#checkPoint").html("WINNER! WINNER! WINNER! Only " + left + " of your party has survived.");
+    $("#checkPoint").html("WINNER! WINNER! CHICKEN DINNER! Only " + left + " of your party has survived.");
     $(".imgHeader").css("background-image", "url(img/endGameWin.jpg)");
     $(".restartGame").show();
     $(".continueOnTrail, .rest, .mourn, .hunt, .talk, .heal").hide();
     gameWinSong.play();
   } else if (game.daysLeft === 40) { // 40 days from end (and multiples of 20)...fort
     $("#randomEventMessage, #checkPoint").empty();
-    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("Welcome. You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortlaramie.png)");
     checkpoints.shift();
     $(".hunt").hide();
@@ -189,7 +190,7 @@ function gameChecker() {
     $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 30) { // 30 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
-    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "! Proceed with caution.");
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
     checkpoints.shift();
     $(".hunt").hide();
@@ -200,7 +201,7 @@ function gameChecker() {
     $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 20) { // 20 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
-    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("Welcome. You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/fortbridger.png)");
     checkpoints.shift();
     $(".hunt").hide();
@@ -208,7 +209,7 @@ function gameChecker() {
     $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 10) { // 10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
-    $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
+    $("#checkPoint").html("You've reached " + checkpoints[0] + "! Proceed with caution.");
     $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
     checkpoints.shift();
     $(".hunt").hide();
@@ -225,7 +226,7 @@ function gameChecker() {
 function medicine() {
   $("#randomEventMessage, #checkPoint").empty();
   if (caravan.medicine <= 0) {
-    $("#event").html("You have 0 medicines.");
+    $("#event").html("You don't have any medicine.");
   } else {
     var index;
     var lowestHealth = 1000;
@@ -278,7 +279,7 @@ function hunt() {
   $("#randomEventMessage, #checkPoint").empty();
   var meatGained = rollNumber(1, 10);
   caravan.food += meatGained * caravan.party.length;
-  $("#event").html("Everyone in your party gathered "+meatGained+" foods!");
+  $("#event").html("Everyone in your party gathered "+meatGained+" food!");
   foodLoss();
   caravan.party.forEach(function (element) {
     element.healthLoss();
@@ -340,6 +341,15 @@ $(function() {
     var char4 = new Character(member3);
     var char5 = new Character(member4);
     caravan.party.push(char1, char2, char3, char4, char5);
+
+    var autoNames = ["Ryan", "Gloria", "Riley", "Megan", "Chris", "Colin", "Blake", "Grace", "Ben", "Mark", "Liam", "Shane", "Christian", "Chance", "Oliver", "Evan", "Perry", "Dallas", "Alex", "Xi Xia", "Jahan", "Kaya", "Josh", "Nathaniel", "Janek", "Clifford", "Cameron", "Keith", "Pizza", "Stormi"];
+    caravan.party.forEach(function(member) {
+      if (!member.name) {
+        var index = rollNumber(0, autoNames.length);
+        member.name = autoNames[index];
+        autoNames.splice(index, 1);
+      }
+    });
 
     updateStats();
     $("#homeScreen").hide();

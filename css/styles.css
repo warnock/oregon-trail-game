@@ -60,15 +60,29 @@ ul {
 }
 
 input[type = "text"] {
-  background-color: #0076ff;
-  border: dashed 1px;
+  background-color: black;
+  border-bottom: dashed 1px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
   color: white;
   width: 300px;
+  font-size: 30px;
+  height: 35px;
+  margin-bottom: 5px;
 }
 
 label {
   font-size: 20px;
 }
+
+h1#start{
+  /*color: #F45116;*/
+  color: #0076ff;
+  font-size: 50px;
+  margin-bottom: -6px;;
+}
+
 
 .btn, button {
   color: black;
@@ -79,6 +93,10 @@ label {
   border-radius: 5px;
   border: solid 5px white;
   width: 175px;
+}
+
+button {
+  margin-top: 15px;
 }
 
 .btn:hover, {
