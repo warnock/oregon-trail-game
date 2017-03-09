@@ -84,7 +84,7 @@ function fates(roll, rivOrTrail) {
   $("#event").html("You advance a day");
 
   if (rivOrTrail === "trail") {
-    if (roll <= 7) {
+    if (roll <= 10) {
       if (caravan.party[charIndex].diseases > 0){
         more = "nother";
       }
@@ -184,7 +184,8 @@ function gameChecker() {
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
     checkpoints.shift();
     $(".hunt").hide();
-    $(".talk").show();
+    $(".continueOnTrail").hide();
+    $(".crossRiver").show();
   } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
@@ -198,7 +199,8 @@ function gameChecker() {
     $(".imgHeader").css("background-image", "url(img/snakeriver.png)");
     checkpoints.shift();
     $(".hunt").hide();
-    $(".talk").show();
+    $(".continueOnTrail").hide();
+    $(".crossRiver").show();
   } else {
     console.log("go ahead and travel");
   }
@@ -357,6 +359,8 @@ $(function() {
     gameChecker();
     console.log(game.daysLeft);
     updateStats();
+    $(".crossRiver").hide();
+    $(".continueOnTrail").show();
   });
 
   $(".rest").click(function() {
