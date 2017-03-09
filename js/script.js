@@ -182,6 +182,7 @@ function gameChecker() {
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
+    $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 30) { //10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
@@ -190,6 +191,8 @@ function gameChecker() {
     $(".hunt").hide();
     $(".continueOnTrail").hide();
     $(".crossRiver").show();
+    $(".talk").show();
+    $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 20) { //10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
@@ -197,6 +200,7 @@ function gameChecker() {
     checkpoints.shift();
     $(".hunt").hide();
     $(".talk").show();
+    $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 10) { //10 days from end (and multiples of 20)...river
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
@@ -205,6 +209,8 @@ function gameChecker() {
     $(".hunt").hide();
     $(".continueOnTrail").hide();
     $(".crossRiver").show();
+    $(".talk").show();
+    $(".talk").css("display", "inline-block");
   } else {
     console.log("go ahead and travel");
   }
