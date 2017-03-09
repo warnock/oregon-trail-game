@@ -86,28 +86,29 @@ function checkDeath() {
 function fates(roll, rivOrTrail) {
   var charIndex = rollNumber(0,caravan.party.length);
   var more = "";
-  $("#event").html("You advance a day");
+  $("#event").html("Though the journey may be rough, you have continued on your trail.");
 
   if (rivOrTrail === "trail") {
     if (roll <= 10) {
       if (caravan.party[charIndex].diseases > 0) {
         more = "nother";
       }
-      $("#randomEventMessage").text(caravan.party[charIndex].name+" got a" + more + " disease!");
+      var diseaseNames = ["dysentery", "cholera", "typhoid", "measles", "diphtheria", "scurvy"];
+      var diseaseIndex = rollNumber(0, diseaseNames.length);
+      $("#randomEventMessage").text(caravan.party[charIndex].name+" contracted " + diseaseNames[diseaseIndex] + "!");
       caravan.party[charIndex].diseases += 1;
     } else if (roll<=14) {
       $("#randomEventMessage").text(caravan.party[charIndex].name + " broke a foot while running from a buffalo.");
       caravan.party[charIndex].health -= 50;
     } else if (roll<=18 && caravan.food > 0){
-      var amount = rollNumber(20, 51);
-      $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after they dropped " + amount + " food!");
-      caravan.food -= amount;
+      $("#randomEventMessage").text("Everyone shunned " + caravan.party[charIndex].name+" after dropping a bushel of food!");
+      caravan.food -= 50;
     } else if (roll<=21){
       $("#randomEventMessage").text("There was a snake in " +  caravan.party[charIndex].name + "'s boot. " + caravan.party[charIndex].name + " contracted a disease.");
       caravan.party[charIndex].diseases += 1;
     } else if (roll >= 98) {
       caravan.food += 50;
-      $("#randomEventMessage").text("Your caravan came across a field of ripe, delicous berries. You gain 50 food!");
+      $("#randomEventMessage").text("Your caravan came across a field of ripe, delicous berries.");
     } else if (roll >= 95) {
       caravan.medicine += 1;
       $("#randomEventMessage").text("A generous, traveling apothecary has gifted you 1 medicine.");
@@ -117,7 +118,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("You found a not-too-hot hot spring! Your party feels more rested.");
     } else {
-      $("#event").html("You advance a day");
+      $("#event").html("You have traveled a day and are one  step closer to Oregon.");
     }
   } else if (rivOrTrail === "river") {
     if (roll <= 10) {
@@ -126,7 +127,7 @@ function fates(roll, rivOrTrail) {
     } else if (roll <= 17) {
       var amount = rollNumber(10, 31);
       caravan.food -= amount;
-      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped " + amount + " food in the river.");
+      $("#randomEventMessage").text("The river was rough and " + caravan.party[charIndex].name + " dropped food in the river.");
     } else if (roll <= 25) {
       caravan.party[charIndex].diseases += 1;
       $("#randomEventMessage").text(caravan.party[charIndex].name + "  contracted a disease from the dirty river.");
@@ -141,7 +142,7 @@ function fates(roll, rivOrTrail) {
       });
       $("#randomEventMessage").text("The river was freezing cold! Everyone loses " + amount + " health.");
     } else {
-      $("#event").text("Your party successfully crossed the river. Onward to Oregon.")
+      $("#event").text("Your pary successfully crossed the river. Onward to Oregon.")
       return;
     }
   } else {
@@ -316,7 +317,7 @@ function updateStats() {
       if (member.diseases > 1) {
         plural = "s";
       }
-      nameString += "<li><span id='memberSick'>" + member.name + " | Health: " + member.health + " | " + member.diseases + " Disease" + plural + "</span></li>";
+      nameString += "<li>" + member.name + " | Health: " + member.health + " | " + member.diseases + " Disease" + plural + "</li>";
     }
   });
 
