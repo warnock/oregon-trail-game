@@ -1,16 +1,18 @@
 # Oregon Trail
 
-#### Oregon Trail JavaScript Game, Current Version: 03/06/2017
+#### Oregon Trail JavaScript Game, Current Version: 03/09/2017
 
 #### By Gloria Friesen, Megan Warnock, Ryan McAlpin, Chris Carr, Riley Watts
 
 ## Description
-
+A web-based re-imagining of the original Oregon Trail game. Users will travel the trail, encountering forts and rivers along the way. Hunt and rest to replenish supplies. Party members may perish on the journey, but as long as at least one survives to Oregon, the user will win.
 
 ## Setup/Installation Instructions
-*
-
-
+* Clone portfolio respository from: http://github.com/warnock/oregon-trail-game
+* Navigate to oregon-trail directory
+* Open index.html in a browser
+* Enter party member names and click Start Game
+* Enjoy!
 
 ## Specifications
 
@@ -41,13 +43,13 @@
 |Application ends game when all players have died|"Players"|All players health = 0 === Game Over|
 |Application recognizes last day as winning the game|"100"|You've won|
 
-
-
 ## Known Bugs
-We'll see.
+No known issues.
 
 ## Support and contact details
+Questions? Concerns? Suggestions?
 
+Reach out to us via github: http://github.com/warnock
 
 ## Technologies Used
 * _HTML_
