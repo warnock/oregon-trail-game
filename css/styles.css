@@ -116,6 +116,11 @@ span#randomEventMessage {
   font-size: 40px;
 }
 
-a {
-  margin-top: 20px;
+.playAgain {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+a:hover {
+  text-decoration: none;
 }
