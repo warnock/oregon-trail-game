@@ -185,7 +185,6 @@ function gameChecker() {
     $(".talk").show();
     $(".talk").css("display", "inline-block");
   } else if (game.daysLeft === 30) { // 30 days from end (and multiples of 20)...river
->>>>>>> clean-up
     $("#randomEventMessage, #checkPoint").empty();
     $("#checkPoint").html("You've reached " + checkpoints[0] + "!");
     $(".imgHeader").css("background-image", "url(img/blueriver.png)");
@@ -332,7 +331,6 @@ $(function() {
     updateStats();
     $("#homeScreen").hide();
     $("#gameScreen").show();
-
   });
 
   $(".continueOnTrail").click(function() {
