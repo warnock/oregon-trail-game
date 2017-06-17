@@ -7,6 +7,8 @@
 ## Description
 A web-based re-imagining of the original Oregon Trail game. Users will travel the trail, encountering forts and rivers along the way. Hunt and rest to replenish supplies. Party members may perish on the journey, but as long as at least one survives to Oregon, the user will win.
 
+To play the game click here: https://warnock.github.io/oregon-trail-game/
+
 ![TOT Screenshot](/img/screenshot.png)
 
 ## Setup/Installation Instructions
